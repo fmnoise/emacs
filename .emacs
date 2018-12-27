@@ -597,8 +597,6 @@ With negative N, comment out original line and use the absolute value."
   (define-key clojure-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
   (define-key clojure-mode-map (kbd "M-i") 'cider-inspect-last-result)
   (define-key clojure-mode-map (kbd "RET") 'paredit-newline)
-
-  (require 'emacs-lisp-mode)
   (define-key emacs-lisp-mode-map (kbd "RET") 'paredit-newline)
 
   ;; TODO
