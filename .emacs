@@ -428,6 +428,7 @@ With negative N, comment out original line and use the absolute value."
   (setq my-packages
         '(
           zenburn-theme
+          color-theme-sanityinc-tomorrow
           clojure-mode
           company
           cider
@@ -452,6 +453,8 @@ With negative N, comment out original line and use the absolute value."
           counsel
           expand-region
           counsel-projectile
+          github-browse-file
+          s
           ))
 
   (dolist (pkg my-packages)
