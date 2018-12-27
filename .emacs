@@ -314,7 +314,6 @@
   (setq mode-require-final-newline nil)
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
-  (setq-default tab-width 1)
 
   ;; helm
   (setq helm-always-two-windows nil)
