@@ -25,7 +25,7 @@
 
 (defun current-branch-name ()
   (require 'magit)
-		(require 'subr-x)
+  (require 'subr-x)
   (if-let (branch (magit-git-string "status"))
     (concat "  .:.  " (car (last (split-string branch " "))))))
 
@@ -45,14 +45,14 @@
 
 (defun copy-region-or-sexp ()
   (interactive)
-		(require 'smartparens)
+  (require 'smartparens)
   (if (and transient-mark-mode mark-active)
       (kill-ring-save (region-beginning) (region-end))
     (sp-copy-sexp)))
 
 (defun kill-region-or-sexp () ;; TODO don't move to clipboard
   (interactive)
-		(require 'smartparens)
+  (require 'smartparens)
   (if (and transient-mark-mode mark-active)
       (kill-region (region-beginning) (region-end))
     (sp-kill-sexp)))
@@ -96,13 +96,13 @@
           rainbow-mode
           magit
           plan9-theme
-										zoom-window
-										helm-themes
-										helm-ag
-										helm-projectile
-										neotree
-										projectile
-										undo-tree
+          zoom-window
+          helm-themes
+          helm-ag
+          helm-projectile
+          neotree
+          projectile
+          undo-tree
           ))
 
   (dolist (pkg my-packages)
@@ -124,10 +124,10 @@
   )
 
 (defun init/lisp ()
-		(add-hook 'clojure-mode-hook #'paredit-mode)
-		(add-hook 'clojure-mode-hook #'cider-mode)
-		(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-		)
+  (add-hook 'clojure-mode-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'cider-mode)
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  )
 
 (defun init/clipboard ()
   (defun copy-to-osx (text &optional push)
@@ -143,14 +143,14 @@
   (setq interprogram-paste-function 'paste-from-osx))
 
 (defun init/languages ()
-		(init/lisp)
-		)
+  (init/lisp)
+  )
 
 (defun init/keybindings ()
   ;; basic
   (global-set-key (kbd "M-c")     'copy-region-or-sexp)
-		;; (global-set-key (kbd "M-C")     'copy-surrounding-sexp)
-		;; (global-set-key (kbd "M-# D")   'sp-clone-sexp-noindent)
+  ;; (global-set-key (kbd "M-C")     'copy-surrounding-sexp)
+  ;; (global-set-key (kbd "M-# D")   'sp-clone-sexp-noindent)
   ;; (global-set-key (kbd "M-# V")   'paste-sexp-with-replace)
   (global-set-key (kbd "M-# v")   'paste-with-replace)
   (global-set-key (kbd "M-# x")   'kill-region-or-sexp)
@@ -158,7 +158,7 @@
   ;; (global-set-key (kbd "M-# a")   'copy-whole-buffer)
   ;; (global-set-key (kbd "M-# A")   'mark-whole-buffer)
 
-		(require 'undo-tree)
+  (require 'undo-tree)
   (global-set-key (kbd "M-# z")   (lambda () (interactive) (deactivate-mark) (undo-tree-undo)))
   (global-set-key (kbd "M-# Z")   (lambda () (interactive) (deactivate-mark) (undo-tree-redo)))
 
@@ -224,11 +224,11 @@
   (global-set-key (kbd "M-# ~")   'helm-buffers-list)
   (global-set-key (kbd "M-# '")   'helm-resume)
   (global-set-key (kbd "C-t")     'helm-themes)
-		(require 'helm-buffers)
-		(add-hook 'helm-after-initialize-hook
-												(lambda()
-														(define-key helm-buffer-map (kbd "`") 'helm-keyboard-quit)
-														(define-key helm-map (kbd "`") 'helm-keyboard-quit)))
+  (require 'helm-buffers)
+  (add-hook 'helm-after-initialize-hook
+            (lambda()
+              (define-key helm-buffer-map (kbd "`") 'helm-keyboard-quit)
+              (define-key helm-map (kbd "`") 'helm-keyboard-quit)))
   )
 
 (defun init/ui ()
@@ -246,10 +246,10 @@
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
   (setq-default tab-width 1)
 
-		;; helm
-		(setq helm-always-two-windows nil)
-		(setq helm-display-buffer-default-height 23)
-		(setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
+  ;; helm
+  (setq helm-always-two-windows nil)
+  (setq helm-display-buffer-default-height 23)
+  (setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
 
   (global-company-mode 1)
   (global-eldoc-mode 1)
@@ -268,13 +268,13 @@
 
 (defun init/setup ()
   (init/packages)
-		(init/clipboard)
+  (init/clipboard)
   (init/ui)
   (init/keybindings)
   (init/modes)
   (init/hooks)
-		(init/git)
-		(init/languages)
+  (init/git)
+  (init/languages)
   )
 
 (init/setup)
