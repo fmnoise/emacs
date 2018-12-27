@@ -533,7 +533,7 @@ With negative N, comment out original line and use the absolute value."
   (setq imenu-auto-rescan t)
 
   ;; TODO
-  ;; (define-key emacs-lisp-mode-map (kbd "M-# !!") 'spacemacs/eval-current-form-sp)
+  (define-key emacs-lisp-mode-map (kbd "M-# !!") 'eval-last-sexp)
 
   (require 'expand-region)
   (global-set-key (kbd "M-e") 'er/expand-region)
