@@ -29,6 +29,12 @@
   (if-let (branch (magit-git-string "status"))
     (concat "  .:.  " (car (last (split-string branch " "))))))
 
+(defun toggle-comment ()
+  (interactive)
+  (if (and transient-mark-mode mark-active)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
+
 (defun xterm-title-update ()
   ;; https://www.emacswiki.org/emacs/FrameTitle
   "Sets buffer file name or buffer name as terminal title"
