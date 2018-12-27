@@ -481,13 +481,12 @@ With negative N, comment out original line and use the absolute value."
                  sgml-skip-tag-forward
                  nil))
 
-  (add-hook 'sgml-mode-hook 'hs-minor-mode)
-  )
+  (add-hook 'sgml-mode-hook 'hs-minor-mode))
 
 
 (defun init/git ()
   (require 'magit)
-  ;;(setq github-browse-file-show-line-at-point 1)
+  (setq github-browse-file-show-line-at-point 1)
   (magit-add-section-hook 'magit-status-sections-hook
                           'magit-insert-unpushed-to-upstream
                           'magit-insert-unpushed-to-upstream-or-recent
@@ -495,9 +494,8 @@ With negative N, comment out original line and use the absolute value."
 
   (global-set-key (kbd "M-# b") 'magit-blame)
   (global-set-key (kbd "M-'")   'toggle-magit-status)
-  ;;(global-set-key (kbd "M-G")   'github-browse-file)
-  (global-set-key (kbd "M-Z")   'magit-diff-buffer-file) ;;???
-  )
+  (global-set-key (kbd "M-G")   'github-browse-file)
+  (global-set-key (kbd "M-Z")   'magit-diff-buffer-file))
 
 (defun init/multiple-cursors ()
   (require 'multiple-cursors)
@@ -610,8 +608,7 @@ With negative N, comment out original line and use the absolute value."
   (put-clojure-indent 'reg-fx 1)
   (put-clojure-indent 'reg-cofx 1)
   (put-clojure-indent 'reg-event-fx 1)
-  (put-clojure-indent 'reg-event-db 1)
-  )
+  (put-clojure-indent 'reg-event-db 1))
 
 (defun init/clipboard ()
   (defun copy-to-osx (text &optional push)
@@ -626,9 +623,6 @@ With negative N, comment out original line and use the absolute value."
   (setq interprogram-cut-function 'copy-to-osx)
   (setq interprogram-paste-function 'paste-from-osx))
 
-(defun init/languages ()
-  (init/lisp)
-  )
 
 (defun init/mappings ()
   (define-key input-decode-map "\e[1;10A" [S-M-up])
@@ -773,8 +767,7 @@ With negative N, comment out original line and use the absolute value."
 
 (defun init/ui ()
   (load-theme 'zenburn t)
-  (menu-bar-mode -1)
-  )
+  (menu-bar-mode -1))
 
 
 (defun init/modes ()
@@ -798,8 +791,7 @@ With negative N, comment out original line and use the absolute value."
   (show-paren-mode 1)
   (delete-selection-mode 1)
   (savehist-mode 0)
-  (which-key-mode 1)
-)
+  (which-key-mode 1))
 
 (defun init/hooks ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -807,8 +799,7 @@ With negative N, comment out original line and use the absolute value."
             (lambda ()
               (interactive)
               (untabify (point-min) (point-max))))
-  (add-hook 'post-command-hook 'xterm-title-update)
-  )
+  (add-hook 'post-command-hook 'xterm-title-update))
 
 (defun init/setup ()
   (init/packages)
@@ -820,8 +811,7 @@ With negative N, comment out original line and use the absolute value."
   (init/hooks)
   (init/git)
   (init/multiple-cursors)
-  (init/languages)
-  (init/extensions)
-)
+  (init/lisp)
+  (init/extensions))
 
 (init/setup)
