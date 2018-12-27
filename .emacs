@@ -98,23 +98,36 @@
           plan9-theme
 										zoom-window
 										helm-themes
+										helm-ag
+										helm-projectile
+										neotree
+										projectile
+										undo-tree
           ))
 
   (dolist (pkg my-packages)
     (unless (package-installed-p pkg)
       (package-install pkg))))
 
-(defun new-empty-buffer ()
-  "Create a new buffer called untitled"
-  (interactive)
-  (let ((newbuf (generate-new-buffer-name "untitled")))
-    (switch-to-buffer newbuf)))
+(defun init/git ()
+  (require 'magit)
+  ;;(setq github-browse-file-show-line-at-point 1)
+  (magit-add-section-hook 'magit-status-sections-hook
+                          'magit-insert-unpushed-to-upstream
+                          'magit-insert-unpushed-to-upstream-or-recent
+                          'replace)
+
+  (global-set-key (kbd "M-# b") 'magit-blame)
+  (global-set-key (kbd "M-'")   'toggle-magit-status)
+  ;;(global-set-key (kbd "M-G")   'github-browse-file)
+  (global-set-key (kbd "M-Z")   'magit-diff-buffer-file) ;;???
+  )
 
 (defun init/lisp ()
 		(add-hook 'clojure-mode-hook #'paredit-mode)
 		(add-hook 'clojure-mode-hook #'cider-mode)
 		(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-)
+		)
 
 (defun init/languages ()
 		(init/lisp)
@@ -198,6 +211,7 @@
   (global-set-key (kbd "M-# ~")   'helm-buffers-list)
   (global-set-key (kbd "M-# '")   'helm-resume)
   (global-set-key (kbd "C-t")     'helm-themes)
+		(require 'helm-buffers)
 		(add-hook 'helm-after-initialize-hook
 												(lambda()
 														(define-key helm-buffer-map (kbd "`") 'helm-keyboard-quit)
@@ -245,6 +259,7 @@
   (init/keybindings)
   (init/modes)
   (init/hooks)
+		(init/git)
 		(init/languages)
   )
 
