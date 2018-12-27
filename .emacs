@@ -129,6 +129,19 @@
 		(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
 		)
 
+(defun init/clipboard ()
+  (defun copy-to-osx (text &optional push)
+    (let ((process-connection-type nil))
+      (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+        (process-send-string proc text)
+        (process-send-eof proc))))
+
+  (defun paste-from-osx ()
+    (shell-command-to-string "pbpaste"))
+
+  (setq interprogram-cut-function 'copy-to-osx)
+  (setq interprogram-paste-function 'paste-from-osx))
+
 (defun init/languages ()
 		(init/lisp)
 		)
@@ -255,6 +268,7 @@
 
 (defun init/setup ()
   (init/packages)
+		(init/clipboard)
   (init/ui)
   (init/keybindings)
   (init/modes)
