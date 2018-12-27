@@ -260,9 +260,9 @@
 (defun init/hooks ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'before-save-hook
-            (lambda () (if (not indent-tabs-mode)
-                           (untabify (point-min) (point-max)))
-              nil))
+            (lambda ()
+              (interactive)
+              (untabify (point-min) (point-max))))
   (add-hook 'post-command-hook 'xterm-title-update)
   )
 
