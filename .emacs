@@ -122,8 +122,49 @@
 
 (defun init/keybindings ()
   ;; basic
-  (global-set-key (kbd "M-# s")   'save-buffer)
-		(global-set-key (kbd "M-`")     'keyboard-quit)
+  (global-set-key (kbd "M-c")     'copy-region-or-sexp)
+		;; (global-set-key (kbd "M-C")     'copy-surrounding-sexp)
+		;; (global-set-key (kbd "M-# D")   'sp-clone-sexp-noindent)
+  ;; (global-set-key (kbd "M-# V")   'paste-sexp-with-replace)
+  (global-set-key (kbd "M-# v")   'paste-with-replace)
+  (global-set-key (kbd "M-# x")   'kill-region-or-sexp)
+  ;; (global-set-key (kbd "M-# X")   'kill-surrounding-sexp)
+  ;; (global-set-key (kbd "M-# a")   'copy-whole-buffer)
+  ;; (global-set-key (kbd "M-# A")   'mark-whole-buffer)
+
+		(require 'undo-tree)
+  (global-set-key (kbd "M-# z")   (lambda () (interactive) (deactivate-mark) (undo-tree-undo)))
+  (global-set-key (kbd "M-# Z")   (lambda () (interactive) (deactivate-mark) (undo-tree-redo)))
+
+  (global-set-key (kbd "M-# s")   'save-buffer) ;; TODO clean selection
+  (global-set-key (kbd "M-`")     'keyboard-quit)
+  (global-set-key (kbd "M-# /")   'toggle-comment)
+  (global-set-key (kbd "M-# }")   'indent-rigidly-right)
+  (global-set-key (kbd "M-# {")   'indent-rigidly-left)
+  ;; (global-set-key (kbd "M-# d")   'duplicate-line-or-region)
+  ;; (global-set-key (kbd "M-# l")   'delete-space-forward)
+  ;; (global-set-key (kbd "M-# k")   'delete-space-backward)
+
+  ;; search
+  ;; (require 'ivy)
+  ;; (global-set-key (kbd "M-# \"")  'ivy-resume)
+  ;; (global-set-key (kbd "M-# S")   'swiper)
+  ;; (global-set-key (kbd "M-# +S")  'counsel-projectile-ag)
+  ;; (define-key ivy-minibuffer-map (kbd "<escape>") 'kill-this-buffer)
+  ;; (global-set-key (kbd "M-# g")   'rgrep)
+  ;; (global-set-key (kbd "M-# .")   'search-symbol-at-point)
+  (global-set-key (kbd "M-# f")   'helm-do-ag-this-file)
+  (global-set-key (kbd "M-# F")   'helm-projectile-ag)
+  (global-set-key (kbd "M-# p")   'helm-projectile-find-file)
+  (global-set-key (kbd "M-/")     'helm-semantic-or-imenu)
+  (global-set-key (kbd "M-?")     'helm-imenu-in-all-buffers)
+
+  ;; tools
+  (with-eval-after-load "neotree"
+    (define-key neotree-mode-map [(left)] 'neotree-select-up-node)
+    (define-key neotree-mode-map [(right)] 'neotree-enter)
+    (define-key neotree-mode-map (kbd "TAB") 'neotree-stretch-toggle))
+  (global-set-key (kbd "M-# |")   'neotree-toggle)
 
   ;; windows/buffers management
   (global-set-key (kbd "M-+ __")  'next-multiframe-window)
@@ -131,9 +172,26 @@
   (global-set-key (kbd "M-# w")   'delete-window)
   (global-set-key (kbd "M-# +@v") 'next-buffer)
   (global-set-key (kbd "M-# +@^") 'previous-buffer)
-  ;;(global-set-key (kbd "M-z")     'zoom-window-no-color-change)
+  (global-set-key (kbd "M-z")     'zoom-window-no-color-change)
   (global-set-key (kbd "M-# n")   'new-empty-buffer)
   (global-set-key (kbd "M-# N")   (lambda () (interactive) (new-empty-buffer) (clojure-mode)))
+
+  ;; navigation
+  (global-set-key (kbd "M-# @^")  'backward-paragraph)
+  (global-set-key (kbd "M-# @v") 'forward-paragraph)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line) ;; TODO off all mc / selection
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line) ;; TODO off all mc / selection
+  (global-set-key (kbd "C-M-<up>") 'scroll-down-line) ;; TODO off all mc / selection
+  (global-set-key (kbd "C-M-<down>") 'scroll-up-line) ;; TODO off all mc / selection
+  (global-set-key (kbd "M-# *@>") 'end-of-visual-line) ;; TODO dupe, decide which is better
+  (global-set-key (kbd "M-# *@<") 'beginning-of-line-text) ;; TODO dupe, decide which is better
+  (global-set-key (kbd "M-# _@>") 'end-of-visual-line)
+  (global-set-key (kbd "M-# _@<") 'beginning-of-line-text)
+  (global-set-key (kbd "M-# @<")  'backward-word)
+  (global-set-key (kbd "M-# @>")  'forward-word)
+  (global-set-key (kbd "C-g")     'goto-line)
+  (global-set-key (kbd "M-# j")   'bookmark-set)
+  (global-set-key (kbd "M-# J")   'bookmark-bmenu-list)
 
   ;; helm
   (global-set-key (kbd "M-x")     'helm-M-x)
