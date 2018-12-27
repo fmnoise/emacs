@@ -85,6 +85,11 @@
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
   (setq-default tab-width 1)
 
+		;; helm
+		(setq helm-always-two-windows nil)
+		(setq helm-display-buffer-default-height 23)
+		(setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
+
   (global-company-mode 1)
   (global-eldoc-mode 1)
   (delete-selection-mode 1)
