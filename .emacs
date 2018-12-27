@@ -552,11 +552,13 @@ With negative N, comment out original line and use the absolute value."
   (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'clojure-mode-hook #'highlight-parentheses-mode)
   (add-hook 'clojure-mode-hook #'show-paren-mode)
+  (add-hook 'clojure-mode-hook #'hs-minor-mode)
 
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses-mode)
   (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
+  (add-hook 'emacs-lisp-mode-hook #'hs-minor-mode)
 
   (require 'paredit)
   ;; TODO paredit-kill should not move into clipboard
