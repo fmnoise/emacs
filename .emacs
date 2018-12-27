@@ -805,7 +805,8 @@ With negative N, comment out original line and use the absolute value."
   (delete-selection-mode 1)
   (savehist-mode 0)
   (which-key-mode 1)
-  )
+  (hs-minor-mode 1)
+)
 
 (defun init/hooks ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
