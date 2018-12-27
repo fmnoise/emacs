@@ -1,3 +1,79 @@
+(defun new-empty-buffer ()
+  "Create a new buffer called untitled"
+  (interactive)
+  (let ((newbuf (generate-new-buffer-name "untitled")))
+    (switch-to-buffer newbuf)))
+
+(defun zoom-window-no-color-change ()
+  (interactive)
+  (require 'zoom-window)
+  (let ((enabled (zoom-window--enable-p))
+        (curframe (window-frame nil)))
+    (if (and (one-window-p) (not enabled))
+        (message "There is only one window!!")
+      (if enabled
+          (with-demoted-errors "Warning: %S"
+            (zoom-window--do-unzoom))
+        (zoom-window--save-mode-line-color)
+        (zoom-window--save-buffers)
+        (zoom-window--save-window-configuration)
+        (delete-other-windows))
+      (zoom-window--toggle-enabled))))
+
+(defun buffer-modified-title-sign ()
+  (if (buffer-modified-p (current-buffer)) "[...]  " ""))
+
+(defun current-branch-name ()
+  (require 'magit)
+		(require 'subr-x)
+  (if-let (branch (magit-git-string "status"))
+    (concat "  .:.  " (car (last (split-string branch " "))))))
+
+(defun xterm-title-update ()
+  ;; https://www.emacswiki.org/emacs/FrameTitle
+  "Sets buffer file name or buffer name as terminal title"
+  (interactive)
+  (require 'projectile)
+
+  (if buffer-file-name
+    (send-string-to-terminal (concat "\033]2; " (buffer-modified-title-sign) (buffer-file-name) (current-branch-name) "\007"))
+    (send-string-to-terminal (concat "\033]2; " (buffer-name) "\007")))
+
+  (if (not (equal (projectile-project-name) "-"))
+    (send-string-to-terminal (concat "\033]1; (" (projectile-project-name) ") \007"))
+    (send-string-to-terminal (concat "\033]1; " (buffer-name) "\007"))))
+
+(defun copy-region-or-sexp ()
+  (interactive)
+		(require 'smartparens)
+  (if (and transient-mark-mode mark-active)
+      (kill-ring-save (region-beginning) (region-end))
+    (sp-copy-sexp)))
+
+(defun kill-region-or-sexp () ;; TODO don't move to clipboard
+  (interactive)
+		(require 'smartparens)
+  (if (and transient-mark-mode mark-active)
+      (kill-region (region-beginning) (region-end))
+    (sp-kill-sexp)))
+
+(defun paste-with-replace ()
+  "Deletes selected region and pastes"
+  (interactive)
+  (when (and transient-mark-mode mark-active)
+    (delete-active-region))
+  (yank))
+
+(defun toggle-magit-status ()
+  (interactive)
+  (if-let ((repo (magit-toplevel)))
+      (if-let ((buf (get-buffer (concat "magit: " (car (last (split-string-and-unquote repo "/")))))))
+          (if (get-buffer-window buf)
+              (progn (delete-windows-on buf) (kill-buffer buf))
+            (magit-status))
+        (magit-status))
+    (message "Not a git repo!")))
+
 (defun init/packages ()
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
