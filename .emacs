@@ -586,17 +586,21 @@ With negative N, comment out original line and use the absolute value."
   (require 'clojure-mode)
   (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
   (define-key clojure-mode-map (kbd "M-# */") 'clojure-ignore)
-
-  (define-key clojure-mode-map (kbd "M-RET s X") 'cider-restart)
-  (define-key clojure-mode-map (kbd "M-RET s j") 'cider-create-sibling-cljs-repl)
-
-  (define-key clojure-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
-  (define-key clojure-mode-map (kbd "M-# #_!!") 'cider-eval-defun-to-comment)
-  (define-key clojure-mode-map (kbd "M-# !!")   'cider-eval-toplevel-sexp)
-  (define-key clojure-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
-
-  (define-key clojure-mode-map (kbd "M-i") 'cider-inspect-last-result)
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
+
+  (require 'cider-mode)
+  (define-key cider-mode-map (kbd "M-RET '") 'cider-jack-in)
+  (define-key cider-mode-map (kbd "M-RET j") 'cider-jack-in-clj&cljs)
+  (define-key cider-mode-map (kbd "M-RET t a") 'cider-test-run-loaded-tests)
+  (define-key cider-mode-map (kbd "M-RET t n") 'cider-test-run-ns-tests)
+  (define-key cider-mode-map (kbd "M-RET t t") 'cider-test-run-test)
+
+  (define-key cider-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
+  (define-key cider-mode-map (kbd "M-# #_!!") 'cider-eval-defun-to-comment)
+  (define-key cider-mode-map (kbd "M-# !!")   'cider-eval-toplevel-sexp)
+  (define-key cider-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
+  (define-key cider-mode-map (kbd "M-i") 'cider-inspect-last-result)
+
 
   ;; TODO
   ;; - setup cljr, hydra-cljr keys
