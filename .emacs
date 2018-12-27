@@ -70,6 +70,20 @@
     (delete-active-region))
   (yank))
 
+(defun paredit-delete-backward-or-region ()
+  (require 'paredit)
+  (interactive)
+  (if (and transient-mark-mode mark-active)
+    (paredit-delete-region (region-beginning) (region-end)) ;;(delete-active-region)
+    (paredit-backward-delete)))
+
+(defun paredit-kill-or-delete-region ()
+  (require 'paredit)
+  (interactive)
+  (if (and transient-mark-mode mark-active)
+    (delete-active-region) ;;(paredit-kill-region)
+    (paredit-kill)))
+
 (defun toggle-magit-status ()
   (interactive)
   (if-let ((repo (magit-toplevel)))
@@ -133,6 +147,56 @@
   (add-hook 'clojure-mode-hook #'paredit-mode)
   (add-hook 'clojure-mode-hook #'cider-mode)
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+
+ (require 'paredit)
+  ;; TODO paredit-kill should not move into clipboard
+  (define-key paredit-mode-map (kbd "M-<up>")    'paredit-backward-up)
+  (define-key paredit-mode-map (kbd "M-<down>")  'paredit-forward-down)
+  (define-key paredit-mode-map (kbd "M-<left>")  'paredit-backward)
+  (define-key paredit-mode-map (kbd "M-<right>") 'paredit-forward)
+
+  (define-key paredit-mode-map (kbd "DEL") 'paredit-delete-backward-or-region)
+  (define-key paredit-mode-map (kbd "M-DEL") 'paredit-backward-delete-line)
+  (define-key paredit-mode-map (kbd "M-# %%") 'paredit-kill-or-delete-region)
+
+  (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly)
+  (define-key paredit-mode-map (kbd "M-9") 'paredit-wrap-round)
+  (define-key paredit-mode-map (kbd "M-0") 'paredit-close-round)
+  (define-key paredit-mode-map (kbd "M-?") 'helm-imenu-in-all-buffers) ;; more useful than convolute-sexp
+  (define-key paredit-mode-map (kbd "M-# +[") 'paredit-wrap-square) ;; can't use simple M-[ due to crashing escape seq handling
+
+  (require 'cider-inspector)
+  (define-key cider-inspector-mode-map (kbd "M-<left>") 'cider-inspector-prev-page)
+  (define-key cider-inspector-mode-map (kbd "M-<right>")'cider-inspector-next-page)
+  (define-key cider-inspector-mode-map (kbd "M-<up>") 'cider-inspector-pop)
+  (define-key cider-inspector-mode-map (kbd "M-<down>") 'cider-inspector-operate-on-point)
+
+  (require 'clojure-mode)
+  (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
+  (define-key clojure-mode-map (kbd "M-# */") 'clojure-ignore)
+
+  (define-key clojure-mode-map (kbd "M-RET s X") 'cider-restart)
+  (define-key clojure-mode-map (kbd "M-RET s j") 'cider-create-sibling-cljs-repl)
+
+  (define-key clojure-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
+  (define-key clojure-mode-map (kbd "M-# #_!!") 'cider-eval-defun-to-comment)
+  (define-key clojure-mode-map (kbd "M-# !!")   'cider-eval-toplevel-sexp)
+  (define-key clojure-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
+
+  (define-key clojure-mode-map (kbd "M-i") 'cider-inspect-last-result)
+  ;;(define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
+
+  ;; TODO
+  ;; - setup cljr, hydra-cljr keys
+  ;; - setup clojure indentation
+
+  ;; indentation
+
+  ;; (put-clojure-indent 'reg-sub 1)
+  ;; (put-clojure-indent 'reg-fx 1)
+  ;; (put-clojure-indent 'reg-cofx 1)
+  ;; (put-clojure-indent 'reg-event-fx 1)
+  ;; (put-clojure-indent 'reg-event-db 1)
   )
 
 (defun init/clipboard ()
