@@ -178,7 +178,7 @@
             (lambda () (if (not indent-tabs-mode)
                            (untabify (point-min) (point-max)))
               nil))
-  ;;(add-hook 'post-command-hook 'xterm-title-update)
+  (add-hook 'post-command-hook 'xterm-title-update)
   )
 
 (defun init/setup ()
