@@ -704,7 +704,7 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-# \"")  'ivy-resume)
   (global-set-key (kbd "M-# S")   'swiper)
   (global-set-key (kbd "M-# +S")  'counsel-projectile-ag)
-  (define-key ivy-minibuffer-map (kbd "<escape>") 'kill-this-buffer)
+  (define-key ivy-minibuffer-map (kbd "M-`") 'kill-this-buffer)
   (global-set-key (kbd "M-# g")   'rgrep)
   (global-set-key (kbd "M-# .")   'search-symbol-at-point)
   (global-set-key (kbd "M-# f")   'helm-do-ag-this-file)
@@ -712,6 +712,7 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-# p")   'helm-projectile-find-file)
   (global-set-key (kbd "M-/")     'helm-semantic-or-imenu)
   (global-set-key (kbd "M-?")     'helm-imenu-in-all-buffers)
+  (global-set-key (kbd "M-f")     'find-file)
 
   ;; tools
   (with-eval-after-load "neotree"
