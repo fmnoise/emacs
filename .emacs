@@ -539,16 +539,6 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-e") 'er/expand-region)
   (global-set-key (kbd "M-o") 'er/mark-outside-pairs)
 
-  (global-set-key (kbd "M-p r") 'paredit-raise-sexp)
-  (global-set-key (kbd "M-p j") 'paredit-join-sexps)
-  (global-set-key (kbd "M-p s") 'paredit-splice-sexps)
-  (global-set-key (kbd "M-p [") 'paredit-wrap-square)
-  (global-set-key (kbd "M-p (") 'paredit-wrap-round)
-  (global-set-key (kbd "M-p {") 'paredit-wrap-curly)
-  (global-set-key (kbd "M-p o") 'er/mark-outside-pairs)
-  (global-set-key (kbd "M-p i") 'er/mark-inside-pairs)
-  (global-set-key (kbd "M-p e") 'er/expand-region)
-
   (setq cider-repl-display-in-current-window t)
   (setq cider-eval-result-duration 30)
   (setq cider-cljs-lein-repl
