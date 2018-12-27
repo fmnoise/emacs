@@ -531,14 +531,6 @@ With negative N, comment out original line and use the absolute value."
 (defun init/lisp ()
   (setq cljr-warn-on-eval nil)
   (setq imenu-auto-rescan t)
-
-  ;; TODO
-  (define-key emacs-lisp-mode-map (kbd "M-# !!") 'eval-last-sexp)
-
-  (require 'expand-region)
-  (global-set-key (kbd "M-e") 'er/expand-region)
-  (global-set-key (kbd "M-o") 'er/mark-outside-pairs)
-
   (setq cider-repl-display-in-current-window t)
   (setq cider-eval-result-duration 30)
   (setq cider-cljs-lein-repl
@@ -559,6 +551,12 @@ With negative N, comment out original line and use the absolute value."
   (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses-mode)
   (add-hook 'emacs-lisp-mode-hook #'show-paren-mode)
   (add-hook 'emacs-lisp-mode-hook #'hs-minor-mode)
+
+  (define-key emacs-lisp-mode-map (kbd "M-# !!") 'eval-last-sexp)
+
+  (require 'expand-region)
+  (global-set-key (kbd "M-e") 'er/expand-region)
+  (global-set-key (kbd "M-o") 'er/mark-outside-pairs)
 
   (require 'paredit)
   ;; TODO paredit-kill should not move into clipboard
