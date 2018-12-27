@@ -584,19 +584,22 @@ With negative N, comment out original line and use the absolute value."
   (define-key clojure-mode-map (kbd "M-# */") 'clojure-ignore)
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
 
-  (require 'cider-mode)
-  (define-key cider-mode-map (kbd "M-RET '") 'cider-jack-in)
-  (define-key cider-mode-map (kbd "M-RET j") 'cider-jack-in-clj&cljs)
-  (define-key cider-mode-map (kbd "M-RET t a") 'cider-test-run-loaded-tests)
-  (define-key cider-mode-map (kbd "M-RET t n") 'cider-test-run-ns-tests)
-  (define-key cider-mode-map (kbd "M-RET t t") 'cider-test-run-test)
+  (define-key clojure-mode-map (kbd "M-RET '") 'cider-jack-in)
+  (define-key clojure-mode-map (kbd "M-RET j") 'cider-jack-in-clj&cljs)
+  (define-key clojure-mode-map (kbd "M-RET t a") 'cider-test-run-loaded-tests)
+  (define-key clojure-mode-map (kbd "M-RET t n") 'cider-test-run-ns-tests)
+  (define-key clojure-mode-map (kbd "M-RET t t") 'cider-test-run-test)
+  (define-key clojure-mode-map (kbd "M-RET s s") 'cider-switch-to-repl-buffer)
 
-  (define-key cider-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
-  (define-key cider-mode-map (kbd "M-# #_!!") 'cider-eval-defun-to-comment)
-  (define-key cider-mode-map (kbd "M-# !!")   'cider-eval-toplevel-sexp)
-  (define-key cider-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
-  (define-key cider-mode-map (kbd "M-i") 'cider-inspect-last-result)
+  (define-key clojure-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
+  (define-key clojure-mode-map (kbd "M-# #_!!") 'cider-eval-defun-to-comment)
+  (define-key clojure-mode-map (kbd "M-# !!")   'cider-eval-toplevel-sexp)
+  (define-key clojure-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
+  (define-key clojure-mode-map (kbd "M-i") 'cider-inspect-last-result)
+  (define-key clojure-mode-map (kbd "RET") 'paredit-newline)
 
+  (require 'emacs-lisp-mode)
+  (define-key emacs-lisp-mode-map (kbd "RET") 'paredit-newline)
 
   ;; TODO
   ;; - setup cljr, hydra-cljr keys
