@@ -795,6 +795,7 @@ With negative N, comment out original line and use the absolute value."
   (setq helm-always-two-windows nil)
   (setq helm-display-buffer-default-height 23)
   (setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
+  (setq-default helm-M-x-fuzzy-match t)
 
   (global-company-mode 1)
   (global-eldoc-mode 1)
