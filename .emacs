@@ -455,6 +455,7 @@ With negative N, comment out original line and use the absolute value."
           counsel-projectile
           github-browse-file
           s
+          hydra
           ))
 
   (dolist (pkg my-packages)
