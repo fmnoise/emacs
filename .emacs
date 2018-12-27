@@ -456,6 +456,7 @@ With negative N, comment out original line and use the absolute value."
           github-browse-file
           s
           hydra
+          which-key
           ))
 
   (dolist (pkg my-packages)
@@ -801,6 +802,7 @@ With negative N, comment out original line and use the absolute value."
   (show-paren-mode 1)
   (delete-selection-mode 1)
   (savehist-mode 0)
+  (which-key-mode 1)
   )
 
 (defun init/hooks ()
