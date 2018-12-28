@@ -590,6 +590,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key clojure-mode-map (kbd "M-RET t n") 'cider-test-run-ns-tests)
   (define-key clojure-mode-map (kbd "M-RET t t") 'cider-test-run-test)
   (define-key clojure-mode-map (kbd "M-RET s s") 'cider-switch-to-repl-buffer)
+  (define-key clojure-mode-map (kbd "M-RET h h") 'cider-doc-lookup)
 
   (define-key clojure-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
   (define-key clojure-mode-map (kbd "M-# #_!!") 'cider-eval-defun-to-comment)
