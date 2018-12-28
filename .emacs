@@ -458,6 +458,7 @@ With negative N, comment out original line and use the absolute value."
           hydra
           which-key
           atom-one-dark-theme
+          planet-theme
           ))
 
   (dolist (pkg my-packages)
