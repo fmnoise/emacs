@@ -1,3 +1,53 @@
+(defun init/packages ()
+  (setq package-archives
+        '(("gnu" . "http://elpa.gnu.org/packages/")
+          ("marmalade" . "http://marmalade-repo.org/packages/")
+          ("melpa" . "http://melpa.org/packages/")))
+
+  (require 'package)
+  (package-initialize)
+  ;;(package-refresh-contents) ;; comment later to
+
+  (setq my-packages
+        '(
+          zenburn-theme
+          color-theme-sanityinc-tomorrow
+          plan9-theme
+          atom-one-dark-theme
+          planet-theme
+          clojure-mode
+          company
+          cider
+          paredit
+          smartparens
+          rainbow-mode
+          magit
+          zoom-window
+          helm
+          helm-themes
+          helm-ag
+          helm-projectile
+          neotree
+          projectile
+          undo-tree
+          rainbow-delimiters
+          highlight-parentheses
+          multiple-cursors
+          clj-refactor
+          swiper
+          counsel
+          expand-region
+          counsel-projectile
+          github-browse-file
+          s
+          hydra
+          which-key
+          ))
+
+  (dolist (pkg my-packages)
+    (unless (package-installed-p pkg)
+      (package-install pkg))))
+
 (defun select-region (begin end)
   (goto-char begin)
   (set-mark-command nil)
@@ -414,56 +464,6 @@ With negative N, comment out original line and use the absolute value."
    'imenu-generic-expression
    '("re-frame" "(*reg-\\(event-db\\|sub\\|sub-raw\\|fx\\|event-fx\\|event-ctx\\|cofx\\)[ \n]+\\([^\t \n]+\\)" 2)
    t))
-
-(defun init/packages ()
-  (setq package-archives
-        '(("gnu" . "http://elpa.gnu.org/packages/")
-          ("marmalade" . "http://marmalade-repo.org/packages/")
-          ("melpa" . "http://melpa.org/packages/")))
-
-  (require 'package)
-  (package-initialize)
-  ;;(package-refresh-contents) ;; comment later to
-
-  (setq my-packages
-        '(
-          zenburn-theme
-          color-theme-sanityinc-tomorrow
-          clojure-mode
-          company
-          cider
-          paredit
-          smartparens
-          helm
-          rainbow-mode
-          magit
-          plan9-theme
-          zoom-window
-          helm-themes
-          helm-ag
-          helm-projectile
-          neotree
-          projectile
-          undo-tree
-          rainbow-delimiters
-          highlight-parentheses
-          multiple-cursors
-          clj-refactor
-          swiper
-          counsel
-          expand-region
-          counsel-projectile
-          github-browse-file
-          s
-          hydra
-          which-key
-          atom-one-dark-theme
-          planet-theme
-          ))
-
-  (dolist (pkg my-packages)
-    (unless (package-installed-p pkg)
-      (package-install pkg))))
 
 (defun init/extensions ()
   (with-eval-after-load 'company
