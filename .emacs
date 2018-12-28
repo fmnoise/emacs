@@ -789,6 +789,7 @@ With negative N, comment out original line and use the absolute value."
   (setq helm-default-display-buffer-functions '(display-buffer-in-side-window))
   (setq-default helm-M-x-fuzzy-match t)
 
+  (helm-mode 1)
   (global-company-mode 1)
   (global-eldoc-mode 1)
   (global-highlight-parentheses-mode 1)
