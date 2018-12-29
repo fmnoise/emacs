@@ -6,7 +6,7 @@
 
   (require 'package)
   (package-initialize)
-  ;;(package-refresh-contents) ;; comment later to
+  ;;(package-refresh-contents)
 
   (setq my-packages
         '(
