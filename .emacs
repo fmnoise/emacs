@@ -42,6 +42,7 @@
           s
           hydra
           which-key
+          markdown-mode
           ))
 
   (dolist (pkg my-packages)
