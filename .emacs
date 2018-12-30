@@ -533,7 +533,7 @@ With negative N, comment out original line and use the absolute value."
   (setq cljr-warn-on-eval nil)
   (setq imenu-auto-rescan t)
   (setq cider-repl-display-in-current-window t)
-  (setq cider-eval-result-duration 30)
+  (setq cider-eval-result-duration 15)
   (setq cider-prompt-for-symbol nil)
   (setq cider-cljs-lein-repl
         "(do
