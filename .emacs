@@ -439,6 +439,7 @@ With negative N, comment out original line and use the absolute value."
 
 (defun toggle-magit-status ()
   (interactive)
+  (require 'subr-x)
   (if-let ((repo (magit-toplevel)))
       (if-let ((buf (get-buffer (concat "magit: " (car (last (split-string-and-unquote repo "/")))))))
           (if (get-buffer-window buf)
