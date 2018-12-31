@@ -488,7 +488,6 @@ With negative N, comment out original line and use the absolute value."
 
   (add-hook 'sgml-mode-hook 'hs-minor-mode))
 
-
 (defun init/git ()
   (require 'magit)
   (setq github-browse-file-show-line-at-point 1)
@@ -569,11 +568,7 @@ With negative N, comment out original line and use the absolute value."
   (put-clojure-indent 'reg-fx 1)
   (put-clojure-indent 'reg-cofx 1)
   (put-clojure-indent 'reg-event-fx 1)
-  (put-clojure-indent 'reg-event-db 1)
-
-  ;; TODO
-  ;; - setup cljr, hydra-cljr keys
-  ;; - setup clojure indentation)
+  (put-clojure-indent 'reg-event-db 1))
 
 (defun init/lisp ()
   (setq cljr-warn-on-eval nil)
@@ -632,7 +627,6 @@ With negative N, comment out original line and use the absolute value."
 
   (setq interprogram-cut-function 'copy-to-osx)
   (setq interprogram-paste-function 'paste-from-osx))
-
 
 (defun init/mappings ()
   (define-key input-decode-map "\e[1;10A" [S-M-up])
@@ -756,26 +750,13 @@ With negative N, comment out original line and use the absolute value."
             (lambda()
               (define-key helm-buffer-map (kbd "TAB") 'helm-execute-persistent-action)
               (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action)
-              (define-key helm-buffer-map (kbd "`") 'helm-keyboard-quit)
-              (define-key helm-map (kbd "`") 'helm-keyboard-quit)))
+              (define-key helm-buffer-map (kbd "M-`") 'helm-keyboard-quit)
+              (define-key helm-map (kbd "M-`") 'helm-keyboard-quit))))
 
   ;; hide/show
   (global-set-key (kbd "C-\\")    'hs-toggle-hiding)
   (global-set-key (kbd "M-F h")   'hs-hide-all)
-  (global-set-key (kbd "M-F s")   'hs-show-all)
-
-  ;; UNUSED
-  ;; (global-set-key (kbd "M-l")     'linum-mode)
-  ;; (global-set-key (kbd "M-;")     'indent-guide-mode)
-  ;; (global-set-key (kbd "M-# m")   (lambda () (interactive) (switch-to-buffer (messages-buffer))))
-
-  ;; TODO
-  ;; - setup window size manipulation: option + ctrl + arrow
-  ;; - setup bookmarks
-  ;; fn+ctrl+shift+alt+arrow(Home End PgUp PgDown) for navigation
-  ;; good hotkeys caps(=alt)+shift + a z / s x / w e
-
-  )
+  (global-set-key (kbd "M-F s")   'hs-show-all))
 
 (defun init/ui ()
   (menu-bar-mode -1)
