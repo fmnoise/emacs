@@ -529,6 +529,50 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-|")  'mc-cursors-on)
   (global-set-key (kbd "M-\\") 'mc-cursors-off))
 
+(defun clojure-hook ()
+  (paredit-mode 1)
+  (cider-mode 1)
+  (rainbow-delimiters-mode 1)
+  (highlight-parentheses-mode 1)
+  (show-paren-mode 1)
+  (hs-minor-mode 1)
+  (yas-minor-mode 1)
+  (clj-refactor-mode 1)
+
+  (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
+  (define-key clojure-mode-map (kbd "M-# */") 'clojure-ignore)
+  (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
+
+  (define-key clojure-mode-map (kbd "M-RET '") 'cider-jack-in)
+  (define-key clojure-mode-map (kbd "M-RET ;") 'cider-jack-in-clj&cljs)
+  (define-key clojure-mode-map (kbd "M-RET t a") 'cider-test-run-loaded-tests)
+  (define-key clojure-mode-map (kbd "M-RET t n") 'cider-test-run-ns-tests)
+  (define-key clojure-mode-map (kbd "M-RET t t") 'cider-test-run-test)
+  (define-key clojure-mode-map (kbd "M-RET s s") 'cider-switch-to-repl-buffer)
+  (define-key clojure-mode-map (kbd "M-RET h h") 'cider-doc)
+
+  (define-key clojure-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
+  (define-key clojure-mode-map (kbd "M-# #_!!") 'cider-eval-defun-to-comment)
+  (define-key clojure-mode-map (kbd "M-# !!")   'cider-eval-toplevel-sexp)
+  (define-key clojure-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
+  (define-key clojure-mode-map (kbd "M-i") 'cider-inspect-last-result)
+  (define-key clojure-mode-map (kbd "RET") 'paredit-newline)
+
+  (define-key cider-inspector-mode-map (kbd "M-<left>") 'cider-inspector-prev-page)
+  (define-key cider-inspector-mode-map (kbd "M-<right>")'cider-inspector-next-page)
+  (define-key cider-inspector-mode-map (kbd "M-<up>") 'cider-inspector-pop)
+  (define-key cider-inspector-mode-map (kbd "M-<down>") 'cider-inspector-operate-on-point)
+
+  (put-clojure-indent 'reg-sub 1)
+  (put-clojure-indent 'reg-fx 1)
+  (put-clojure-indent 'reg-cofx 1)
+  (put-clojure-indent 'reg-event-fx 1)
+  (put-clojure-indent 'reg-event-db 1)
+
+  ;; TODO
+  ;; - setup cljr, hydra-cljr keys
+  ;; - setup clojure indentation)
+
 (defun init/lisp ()
   (setq cljr-warn-on-eval nil)
   (setq imenu-auto-rescan t)
@@ -541,12 +585,8 @@ With negative N, comment out original line and use the absolute value."
          (figwheel-sidecar.repl-api/start-figwheel!)
          (figwheel-sidecar.repl-api/cljs-repl))")
 
-  (add-hook 'clojure-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'cider-mode)
-  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'clojure-mode-hook #'highlight-parentheses-mode)
-  (add-hook 'clojure-mode-hook #'show-paren-mode)
-  (add-hook 'clojure-mode-hook #'hs-minor-mode)
+  (add-hook 'clojure-mode-hook #'clojure-hook)
+
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses-mode)
@@ -554,6 +594,7 @@ With negative N, comment out original line and use the absolute value."
   (add-hook 'emacs-lisp-mode-hook #'hs-minor-mode)
   (add-hook 'clojurescript-mode-hook #'add-reframe-regs-to-imenu)
 
+  (define-key emacs-lisp-mode-map (kbd "RET") 'paredit-newline)
   (define-key emacs-lisp-mode-map (kbd "M-# !!") 'eval-last-sexp)
 
   (require 'expand-region)
@@ -575,46 +616,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key paredit-mode-map (kbd "M-9") 'paredit-wrap-round)
   (define-key paredit-mode-map (kbd "M-0") 'paredit-close-round)
   (define-key paredit-mode-map (kbd "M-?") 'helm-imenu-in-all-buffers) ;; more useful than convolute-sexp
-  (define-key paredit-mode-map (kbd "M-# +[") 'paredit-wrap-square) ;; can't use simple M-[ due to crashing escape seq handling
-
-  (require 'cider-inspector)
-  (define-key cider-inspector-mode-map (kbd "M-<left>") 'cider-inspector-prev-page)
-  (define-key cider-inspector-mode-map (kbd "M-<right>")'cider-inspector-next-page)
-  (define-key cider-inspector-mode-map (kbd "M-<up>") 'cider-inspector-pop)
-  (define-key cider-inspector-mode-map (kbd "M-<down>") 'cider-inspector-operate-on-point)
-
-  (require 'clojure-mode)
-  (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
-  (define-key clojure-mode-map (kbd "M-# */") 'clojure-ignore)
-  (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
-
-  (define-key clojure-mode-map (kbd "M-RET '") 'cider-jack-in)
-  (define-key clojure-mode-map (kbd "M-RET ;") 'cider-jack-in-clj&cljs)
-  (define-key clojure-mode-map (kbd "M-RET t a") 'cider-test-run-loaded-tests)
-  (define-key clojure-mode-map (kbd "M-RET t n") 'cider-test-run-ns-tests)
-  (define-key clojure-mode-map (kbd "M-RET t t") 'cider-test-run-test)
-  (define-key clojure-mode-map (kbd "M-RET s s") 'cider-switch-to-repl-buffer)
-  (define-key clojure-mode-map (kbd "M-RET h h") 'cider-doc)
-
-  (define-key clojure-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
-  (define-key clojure-mode-map (kbd "M-# #_!!") 'cider-eval-defun-to-comment)
-  (define-key clojure-mode-map (kbd "M-# !!")   'cider-eval-toplevel-sexp)
-  (define-key clojure-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
-  (define-key clojure-mode-map (kbd "M-i") 'cider-inspect-last-result)
-  (define-key clojure-mode-map (kbd "RET") 'paredit-newline)
-  (define-key emacs-lisp-mode-map (kbd "RET") 'paredit-newline)
-
-  ;; TODO
-  ;; - setup cljr, hydra-cljr keys
-  ;; - setup clojure indentation
-
-  ;; indentation
-
-  (put-clojure-indent 'reg-sub 1)
-  (put-clojure-indent 'reg-fx 1)
-  (put-clojure-indent 'reg-cofx 1)
-  (put-clojure-indent 'reg-event-fx 1)
-  (put-clojure-indent 'reg-event-db 1))
+  (define-key paredit-mode-map (kbd "M-# +[") 'paredit-wrap-square))
 
 (defun init/clipboard ()
   (defun copy-to-osx (text &optional push)
