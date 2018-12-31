@@ -43,6 +43,8 @@
           hydra
           which-key
           markdown-mode
+          yaml-mode
+          dockerfile-mode
           ))
 
   (dolist (pkg my-packages)
