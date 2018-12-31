@@ -761,7 +761,7 @@ With negative N, comment out original line and use the absolute value."
 
 (defun init/ui ()
   (menu-bar-mode -1)
-  (load-theme 'zenburn t)
+  (load-theme 'atom-one-dark t)
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/modes ()
