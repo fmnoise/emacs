@@ -751,7 +751,7 @@ With negative N, comment out original line and use the absolute value."
               (define-key helm-buffer-map (kbd "TAB") 'helm-execute-persistent-action)
               (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action)
               (define-key helm-buffer-map (kbd "M-`") 'helm-keyboard-quit)
-              (define-key helm-map (kbd "M-`") 'helm-keyboard-quit))))
+              (define-key helm-map (kbd "M-`") 'helm-keyboard-quit)))
 
   ;; hide/show
   (global-set-key (kbd "C-\\")    'hs-toggle-hiding)
