@@ -694,6 +694,7 @@ With negative N, comment out original line and use the absolute value."
 
   ;; search
   (require 'ivy)
+  (require 'helm-projectile)
   (global-set-key (kbd "M-# \"")  'ivy-resume)
   (global-set-key (kbd "M-# S")   'swiper)
   (global-set-key (kbd "M-# +S")  'counsel-projectile-ag)
