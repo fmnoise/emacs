@@ -162,7 +162,7 @@
     (when-let ((name (buffer-name)))
       (let ((cpoint (point))
             (filename (concat (projectile-project-root)
-                              (first (split-string name ".~")))))
+                              (car (split-string name ".~")))))
         (if (file-exists-p filename)
             (progn
               (find-file filename)
