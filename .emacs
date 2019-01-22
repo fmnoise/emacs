@@ -497,6 +497,8 @@ With negative N, comment out original line and use the absolute value."
                           'magit-insert-unpushed-to-upstream-or-recent
                           'replace)
 
+  (setq magit-display-buffer-function 'magit-display-buffer-fullcolumn-most-v1)
+
   (global-set-key (kbd "M-# b") 'magit-blame)
   (global-set-key (kbd "M-'")   'toggle-magit-status)
   (global-set-key (kbd "M-G")   'github-browse-file)
