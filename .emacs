@@ -450,7 +450,6 @@ With negative N, comment out original line and use the absolute value."
 
 (defun cider-eval-toplevel-sexp ()
   (interactive)
-  (require 'smartparens)
   (let ((curpoint (point)))
     (when (< (point) (line-end-position))
       (goto-char (cl-incf (point))))
@@ -458,8 +457,7 @@ With negative N, comment out original line and use the absolute value."
     (while (and
             (> (point) (line-beginning-position))
             (< (cl-incf deepness) 50))
-      (goto-char (cl-decf (point)))
-      (ignore-errors (sp-beginning-of-sexp)))
+      (beginning-of-sexp))
     (cider-eval-sexp-at-point)
     (goto-char curpoint)))
 
