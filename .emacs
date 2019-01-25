@@ -45,6 +45,7 @@
           markdown-mode
           yaml-mode
           dockerfile-mode
+          cyphejor
           ))
 
   (dolist (pkg my-packages)
@@ -765,6 +766,37 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-F h")   'hs-hide-all)
   (global-set-key (kbd "M-F s")   'hs-show-all))
 
+(defun init/modeline ()
+  (setq-default mode-line-format (list "-%&- %b (%m) %l:%p" cider-mode-line))
+  (when  (require 'cyphejor)
+    (setq
+     cyphejor-rules
+     '(:upcase
+       ("bookmark"    "->")
+       ("clojure"     "clj")
+       ("clojurescript" "cljs")
+       ("js"          "js")
+       ("clojurec"    "cljc")
+       ("buffer"      "β")
+       ("diff"        "Δ")
+       ("dired"       "DIR")
+       ("emacs"       "ε")
+       ("magit"       "git")
+       ("fundamental" "F")
+       ("inferior"    "i" :prefix)
+       ("interaction" "i" :prefix)
+       ("interactive" "i" :prefix)
+       ("lisp"        "λ" :postfix)
+       ("menu"        "=" :postfix)
+       ("mode"        "")
+       ("package"     "pkg")
+       ("python"      "py")
+       ("shell"       "sh" :postfix)
+       ("text"        "txt")
+       ("repl"        ">_")
+       ("wdired"      "WDIR"))))
+  (cyphejor-mode t))
+
 (defun init/ui ()
   (menu-bar-mode -1)
   (load-theme 'atom-one-dark t)
@@ -815,6 +847,7 @@ With negative N, comment out original line and use the absolute value."
   (init/git)
   (init/multiple-cursors)
   (init/lisp)
+  (init/modeline)
   (init/extensions))
 
 (init/setup)
