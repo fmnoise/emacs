@@ -118,7 +118,42 @@
             (when (= 0 sp-successive-kill-preserve-whitespace)
               (kill-append sp-last-kill-whitespace nil)))))))))
 
-(defun clojure-ignore ()
+;; got from https://github.com/noprompt/matilde
+
+(defun char-at-point ()
+  (interactive)
+  (buffer-substring-no-properties (point) (+ 1 (point))))
+
+(defun clj/string-name (s)
+  (substring s 1 -1))
+
+(defun clj/keyword-name (s)
+  (substring s 1))
+
+(defun clj/delete-and-extract-sexp ()
+  (let* ((begin (point)))
+    (forward-sexp)
+    (let* ((result (buffer-substring-no-properties begin (point))))
+      (delete-region begin (point))
+      result)))
+
+(defun clj/toggle-keyword-string ()
+  (interactive)
+  (save-excursion
+    (if (equal 1 (point))
+        nil
+      (cond
+       ((equal "\"" (char-at-point))
+        (insert ":" (clj/string-name
+                     (clj/delete-and-extract-sexp))))
+       ((equal ":" (char-at-point))
+        (insert "\"" (clj/keyword-name
+                      (clj/delete-and-extract-sexp)) "\""))
+       (t (progn
+            (backward-char)
+            (clj/toggle-keyword-string)))))))
+
+(defun clj/ignore ()
   (interactive)
   (when (not (string-equal (string (following-char)) "(")) ;; TODO {} []
     (paredit-backward-up))
@@ -547,7 +582,7 @@ With negative N, comment out original line and use the absolute value."
   (clj-refactor-mode 1)
 
   (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
-  (define-key clojure-mode-map (kbd "M-# */") 'clojure-ignore)
+  (define-key clojure-mode-map (kbd "M-# */") 'clj/ignore)
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
 
   (define-key clojure-mode-map (kbd "M-RET '") 'cider-jack-in)
