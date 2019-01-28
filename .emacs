@@ -1,3 +1,5 @@
+;; TODO - sql
+
 (defun init/packages ()
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -483,6 +485,7 @@ With negative N, comment out original line and use the absolute value."
         (magit-status))
     (message "Not a git repo!")))
 
+;; TODO maybe use paredit navigation?
 (defun cider-eval-toplevel-sexp ()
   (interactive)
   (let ((curpoint (point)))
