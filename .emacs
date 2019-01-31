@@ -601,7 +601,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key clojure-mode-map (kbd "M-# !!")   'cider-eval-toplevel-sexp)
   (define-key clojure-mode-map (kbd "M-# _!!")  'cider-eval-sexp-at-point) ;; TODO - good combination
   (define-key clojure-mode-map (kbd "M-i") 'cider-inspect-last-result)
-  (define-key clojure-mode-map (kbd "RET") 'paredit-newline)
+  (define-key clojure-mode-map (kbd "RET") 'newline-and-indent) ;; paredit-newline does too much autoident
 
   (define-key cider-inspector-mode-map (kbd "M-<left>") 'cider-inspector-prev-page)
   (define-key cider-inspector-mode-map (kbd "M-<right>")'cider-inspector-next-page)
