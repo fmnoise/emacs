@@ -773,8 +773,6 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-# @^")  'backward-paragraph)
   (global-set-key (kbd "M-# @v") 'forward-paragraph)
 
-  (global-set-key (kbd "<mouse-5>") 'scroll-up-line) ;; TODO off all mc / selection
-  (global-set-key (kbd "<mouse-4>") 'scroll-down-line) ;; TODO off all mc / selection
   (global-set-key (kbd "C-M-<up>") 'scroll-down-line) ;; TODO off all mc / selection
   (global-set-key (kbd "C-M-<down>") 'scroll-up-line) ;; TODO off all mc / selection
 
