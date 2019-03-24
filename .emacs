@@ -394,6 +394,12 @@ With negative N, comment out original line and use the absolute value."
   (let ((newbuf (generate-new-buffer-name "untitled")))
     (switch-to-buffer newbuf)))
 
+;; Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive)
+  (revert-buffer :ignore-auto :noconfirm))
+
 (defun zoom-window-no-color-change ()
   (interactive)
   (require 'zoom-window)
@@ -727,6 +733,7 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-# Z")   (lambda () (interactive) (deactivate-mark) (undo-tree-redo)))
 
   (global-set-key (kbd "M-# s")   'save-buffer) ;; TODO clean selection
+  (global-set-key (kbd "M-# R")   'revert-buffer-no-confirm)
   (global-set-key (kbd "M-`")     'keyboard-quit)
   (global-set-key (kbd "M-# /")   'toggle-comment)
   (global-set-key (kbd "M-# }")   'indent-rigidly-right)
