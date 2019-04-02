@@ -595,7 +595,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
 
   (define-key clojure-mode-map (kbd "M-RET '") 'cider-jack-in)
-  (define-key clojure-mode-map (kbd "M-RET ;") 'cider-jack-in-clj&cljs)
+  (define-key clojure-mode-map (kbd "M-RET ;") 'cider-jack-in-cljs)
   (define-key clojure-mode-map (kbd "M-RET t a") 'cider-test-run-loaded-tests)
   (define-key clojure-mode-map (kbd "M-RET t n") 'cider-test-run-ns-tests)
   (define-key clojure-mode-map (kbd "M-RET t t") 'cider-test-run-test)
