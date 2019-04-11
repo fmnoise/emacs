@@ -1,5 +1,3 @@
-;; TODO - sql
-
 (defun init/packages ()
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
