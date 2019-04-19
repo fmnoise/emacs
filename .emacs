@@ -817,7 +817,7 @@ With negative N, comment out original line and use the absolute value."
 (defun init/ui ()
   (menu-bar-mode -1)
   (setq-default mode-line-format (list " " mode-line-modified " %b === %l:%p {%m}" cider-mode-line))
-  (load-theme 'atom-one-dark t)
+  (load-theme 'nord t)
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/modes ()
