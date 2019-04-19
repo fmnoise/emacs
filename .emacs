@@ -828,6 +828,14 @@ With negative N, comment out original line and use the absolute value."
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
+  ;;(setq make-backup-files nil)
+  ;;(setq auto-save-default nil)
+  (setq create-lockfiles nil)
+  (setq backup-directory-alist
+        '(("" . "~/.emacs.d/backup")))
+  (setq auto-save-file-name-transforms
+        `((".*" "~/.emacs.d/backup/" t)))
+
   (setq neo-smart-open t)
   (setq-default neo-show-hidden-files t)
   ;; helm
