@@ -845,6 +845,8 @@ With negative N, comment out original line and use the absolute value."
   (setq-default helm-M-x-fuzzy-match t)
 
   (put 'downcase-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+
   (helm-mode 1)
   (global-company-mode 1)
   (global-eldoc-mode 1)
