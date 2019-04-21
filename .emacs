@@ -45,6 +45,7 @@
           markdown-mode
           yaml-mode
           dockerfile-mode
+          perspective
           ))
 
   (dolist (pkg my-packages)
