@@ -815,6 +815,7 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-F s")   'hs-show-all))
 
 (defun init/ui ()
+  (set-default-font "CamingoCode 17")
   (menu-bar-mode -1)
   (setq-default mode-line-format (list " " mode-line-modified " %b === %l:%p {%m}" cider-mode-line))
   (load-theme 'nord t)
