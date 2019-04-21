@@ -815,9 +815,12 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-F s")   'hs-show-all))
 
 (defun init/ui ()
+  (require 'projectile)
   (set-default-font "CamingoCode 17")
   (menu-bar-mode -1)
-  (setq-default mode-line-format (list " " mode-line-modified " %b === %l:%p {%m}" cider-mode-line))
+  (setq-default mode-line-format (list " " mode-line-modified  " %b "
+                                       '(:eval (when (ignore-errors (projectile-project-root)) (concat "[" (projectile-project-name) "]")))
+                                       " === %l:%p {%m}" cider-mode-line))
   (load-theme 'nord t)
   (fset 'yes-or-no-p 'y-or-n-p))
 
