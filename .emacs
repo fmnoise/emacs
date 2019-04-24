@@ -399,6 +399,18 @@ With negative N, comment out original line and use the absolute value."
   (interactive)
   (revert-buffer :ignore-auto :noconfirm))
 
+(defun zoom-window--do-unzoom--no-color-change ()
+  (require 'zoom-window)
+  (let ((current-line (line-number-at-pos))
+        (current-column (current-column))
+        (current-buf (current-buffer)))
+    ;;(zoom-window--restore-mode-line-face)
+    (zoom-window--restore-window-configuration)
+    (unless (string= (buffer-name current-buf) (buffer-name))
+      (switch-to-buffer current-buf))
+    (zoom-window--goto-line current-line)
+    (move-to-column current-column)))
+
 (defun zoom-window-no-color-change ()
   (interactive)
   (require 'zoom-window)
@@ -408,8 +420,8 @@ With negative N, comment out original line and use the absolute value."
         (message "There is only one window!!")
       (if enabled
           (with-demoted-errors "Warning: %S"
-            (zoom-window--do-unzoom))
-        (zoom-window--save-mode-line-color)
+            (zoom-window--do-unzoom--no-color-change))
+        ;; (zoom-window--save-mode-line-color)
         (zoom-window--save-buffers)
         (zoom-window--save-window-configuration)
         (delete-other-windows))
