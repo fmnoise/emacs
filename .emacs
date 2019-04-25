@@ -527,6 +527,13 @@ With negative N, comment out original line and use the absolute value."
    '("re-frame" "(*reg-\\(event-db\\|sub\\|sub-raw\\|fx\\|event-fx\\|event-ctx\\|cofx\\)[ \n]+\\([^\t \n]+\\)" 2)
    t))
 
+(defun clojure/reset-reloaded-repl ()
+  (interactive)
+  (save-some-buffers)
+  (with-current-buffer (cider-current-repl-buffer)
+    (cider-interactive-eval
+     "(reset)")))
+
 (defun init/extensions ()
   (with-eval-after-load 'company
     (define-key company-active-map [left] #'company-abort))
@@ -611,6 +618,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key clojure-mode-map (kbd "M-RET t n") 'cider-test-run-ns-tests)
   (define-key clojure-mode-map (kbd "M-RET t t") 'cider-test-run-test)
   (define-key clojure-mode-map (kbd "M-RET s s") 'cider-switch-to-repl-buffer)
+  (define-key clojure-mode-map (kbd "M-RET /")   'clojure/reset-reloaded-repl)
   (define-key clojure-mode-map (kbd "M-RET h h") 'cider-doc)
 
   (define-key clojure-mode-map (kbd "M-# *!!")  'cider-eval-buffer)
