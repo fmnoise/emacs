@@ -609,7 +609,6 @@ With negative N, comment out original line and use the absolute value."
   (clj-refactor-mode 1)
 
   (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
-  (define-key clojure-mode-map (kbd "M-# */") 'clj/ignore)
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
 
   (define-key clojure-mode-map (kbd "M-RET '") 'cider-jack-in)
