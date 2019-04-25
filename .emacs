@@ -788,6 +788,7 @@ With negative N, comment out original line and use the absolute value."
 
   ;; navigation/selection
   (global-set-key (kbd "M-m") 'set-mark-command)
+  (global-set-key (kbd "M-# */") 'set-mark-command)
   (global-set-key (kbd "M-# @^")  'backward-paragraph)
   (global-set-key (kbd "M-# @v") 'forward-paragraph)
 
