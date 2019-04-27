@@ -608,6 +608,13 @@ With negative N, comment out original line and use the absolute value."
   (yas-minor-mode 1)
   (clj-refactor-mode 1)
 
+  (when (display-graphic-p)
+    (define-key clojure-mode-map (kbd "s-r") 'hydra-cljr-help-menu/body)
+    (define-key clojure-mode-map (kbd "C-<return>")  'cider-eval-buffer)
+    (define-key clojure-mode-map (kbd "s-S-<return>") 'cider-eval-defun-to-comment)
+    (define-key clojure-mode-map (kbd "s-<return>")   'cider-eval-toplevel-sexp)
+    (define-key clojure-mode-map (kbd "S-<return>")  'cider-eval-sexp-at-point))
+
   (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
 
@@ -661,6 +668,7 @@ With negative N, comment out original line and use the absolute value."
 
   (define-key emacs-lisp-mode-map (kbd "RET") 'paredit-newline)
   (define-key emacs-lisp-mode-map (kbd "M-# !!") 'eval-last-sexp)
+  (define-key emacs-lisp-mode-map (kbd "s-<return>") 'eval-last-sexp)
 
   (require 'expand-region)
   (global-set-key (kbd "M-e") 'er/expand-region)
@@ -676,12 +684,15 @@ With negative N, comment out original line and use the absolute value."
   (define-key paredit-mode-map (kbd "DEL") 'paredit-delete-backward-or-region)
   (define-key paredit-mode-map (kbd "M-DEL") 'paredit-backward-delete-line)
   (define-key paredit-mode-map (kbd "M-# %%") 'paredit-kill-or-delete-region)
+  (define-key paredit-mode-map (kbd "s-<backspace>") 'paredit-kill-or-delete-region)
 
   (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly)
   (define-key paredit-mode-map (kbd "M-9") 'paredit-wrap-round)
   (define-key paredit-mode-map (kbd "M-0") 'paredit-close-round)
   (define-key paredit-mode-map (kbd "M-?") 'helm-imenu-in-all-buffers) ;; more useful than convolute-sexp
-  (define-key paredit-mode-map (kbd "M-# +[") 'paredit-wrap-square))
+  (define-key paredit-mode-map (kbd "M-# +[") 'paredit-wrap-square)
+  (when (display-graphic-p)
+    (define-key paredit-mode-map (kbd "M-[") 'paredit-wrap-square)))
 
 (defun init/clipboard ()
   (defun copy-to-osx (text &optional push)
@@ -835,14 +846,80 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-F h")   'hs-hide-all)
   (global-set-key (kbd "M-F s")   'hs-show-all))
 
+(defun init/keybindings-ui ()
+  ;; basic
+  (global-set-key (kbd "s-c") 'copy-region-or-sexp)
+  (global-set-key (kbd "s-C") 'copy-surrounding-sexp)
+  (global-set-key (kbd "s-D") 'sp-clone-sexp-noindent)
+  (global-set-key (kbd "s-V") 'paste-sexp-with-replace)
+  (global-set-key (kbd "s-v") 'paste-with-replace)
+  (global-set-key (kbd "s-x") 'kill-region-or-sexp)
+  (global-set-key (kbd "s-X") 'kill-surrounding-sexp)
+  (global-set-key (kbd "s-a") 'copy-whole-buffer)
+  (global-set-key (kbd "s-A") 'mark-whole-buffer)
+  (global-set-key (kbd "s-s") 'save-buffer) ;; TODO clean selection
+  (global-set-key (kbd "s-R") 'revert-buffer-no-confirm)
+  (global-set-key (kbd "s-/") 'toggle-comment)
+  (global-set-key (kbd "s-}") 'indent-rigidly-right)
+  (global-set-key (kbd "s-{") 'indent-rigidly-left)
+  (global-set-key (kbd "s-d") 'duplicate-line-or-region)
+  (global-set-key (kbd "s-l") 'delete-space-forward)
+  (global-set-key (kbd "s-k") 'delete-space-backward)
+
+  ;; search
+  (global-set-key (kbd "s-\"")  'ivy-resume)
+  (global-set-key (kbd "s-S")   'swiper)
+  (global-set-key (kbd "s-M-S") 'counsel-projectile-ag)
+  (global-set-key (kbd "s-g")   'rgrep)
+  (global-set-key (kbd "s-.")   'search-symbol-at-point)
+  (global-set-key (kbd "s-f")   'helm-do-ag-this-file)
+  (global-set-key (kbd "s-F")   'helm-projectile-ag)
+  (global-set-key (kbd "s-p")   'helm-projectile-find-file)
+
+  ;; tools
+  (global-set-key (kbd "s-\\") 'neotree-toggle)
+
+  ;; windows/buffers management
+  (global-set-key (kbd "s-ESC") 'keyboard-quit)
+  (global-set-key (kbd "M-<tab>")  'next-multiframe-window)
+  (global-set-key (kbd "s-q")   'kill-buffer-and-window)
+  (global-set-key (kbd "s-w")   'delete-window)
+  (global-set-key (kbd "s-M-<down>") 'next-buffer)
+  (global-set-key (kbd "s-M-<up>") 'previous-buffer)
+  (global-set-key (kbd "s-n")   'new-empty-buffer)
+  (global-set-key (kbd "S-N")   (lambda () (interactive) (new-empty-buffer) (clojure-mode)))
+
+  ;; navigation/selection
+  (global-set-key (kbd "s-C-/") 'set-mark-command)
+  (global-set-key (kbd "s-<up>")  'backward-paragraph)
+  (global-set-key (kbd "s-<down>") 'forward-paragraph)
+  (global-set-key (kbd "C-M-<up>") 'scroll-down-line) ;; TODO off all mc / selection
+  (global-set-key (kbd "C-M-<down>") 'scroll-up-line) ;; TODO off all mc / selection
+  (global-set-key (kbd "s-<right>")  'end-of-visual-line)
+  (global-set-key (kbd "s-<left>")  'beginning-of-line-text)
+  (global-set-key (kbd "s-C-<left>")  'backward-word)
+  (global-set-key (kbd "s-C-<right>")  'forward-word)
+
+  ;; USED??
+  (global-set-key (kbd "s-j")   'bookmark-set)
+  (global-set-key (kbd "s-J")   'bookmark-bmenu-list)
+
+  ;; helm
+  (global-set-key (kbd "s-`")   'helm-buffers-list)
+  (global-set-key (kbd "C-<tab>")  'helm-buffers-list)
+  (global-set-key (kbd "s-'")   'helm-resume)
+)
+
 (defun init/ui ()
   (require 'projectile)
   (set-default-font "CamingoCode 17")
   (menu-bar-mode -1)
+  (tool-bar-mode -1)
   (setq-default mode-line-format (list " " mode-line-modified  " %b "
                                        '(:eval (when (ignore-errors (projectile-project-root)) (concat "[" (projectile-project-name) "]")))
                                        " === %l:%p {%m}" cider-mode-line))
-  (load-theme 'nord t)
+  (load-theme 'sanityinc-tomorrow-fmnoise t)
+  (setq base16-theme-256-color-source 'colors)
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/modes ()
@@ -888,7 +965,8 @@ With negative N, comment out original line and use the absolute value."
             (lambda ()
               (interactive)
               (untabify (point-min) (point-max))))
-  (add-hook 'post-command-hook 'xterm-title-update))
+  (if (not (display-graphic-p))
+      (add-hook 'post-command-hook 'xterm-title-update)))
 
 (defun init/setup ()
   (init/packages)
@@ -896,6 +974,8 @@ With negative N, comment out original line and use the absolute value."
   (init/ui)
   (init/mappings)
   (init/keybindings)
+  (when (display-graphic-p)
+    (init/keybindings-ui))
   (init/modes)
   (init/hooks)
   (init/git)
