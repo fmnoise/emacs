@@ -815,13 +815,9 @@ With negative N, comment out original line and use the absolute value."
 
   (global-set-key (kbd "M-# @>")  'end-of-visual-line)
   (global-set-key (kbd "M-# @<")  'beginning-of-line-text)
-  ;; (global-set-key (kbd "M-# _@>") 'mark-line-till-end) ;; TODO
-  ;; (global-set-key (kbd "M-# _@<") 'mark-line-till-beginning) ;; TODO
 
   (global-set-key (kbd "M-# *@<")  'backward-word)
   (global-set-key (kbd "M-# *@>")  'forward-word)
-  ;; (global-set-key (kbd "M-# _*@<") 'mark-word-backward) ;; TODO
-  ;; (global-set-key (kbd "M-# _*@>") 'mark-word-forward) ;; TODO
 
   (global-set-key (kbd "C-g")     'goto-line)
   (global-set-key (kbd "M-# j")   'bookmark-set)
@@ -930,8 +926,6 @@ With negative N, comment out original line and use the absolute value."
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
-  ;;(setq make-backup-files nil)
-  ;;(setq auto-save-default nil)
   (setq create-lockfiles nil)
   (setq backup-directory-alist
         '(("" . "~/.emacs.d/backup")))
