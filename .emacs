@@ -563,6 +563,8 @@ With negative N, comment out original line and use the absolute value."
                           'replace)
 
   (setq magit-display-buffer-function 'magit-display-buffer-fullcolumn-most-v1)
+  (when (display-graphic-p)
+    (define-key magit-status-mode-map (kbd "M-<tab>") 'next-multiframe-window))
 
   (global-set-key (kbd "M-# b") 'magit-blame)
   (global-set-key (kbd "M-'")   'toggle-magit-status)
