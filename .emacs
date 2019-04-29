@@ -915,11 +915,12 @@ With negative N, comment out original line and use the absolute value."
   (set-default-font "CamingoCode 17")
   (menu-bar-mode -1)
   (tool-bar-mode -1)
+  (when (display-graphic-p) (scroll-bar-mode -1))
   (setq-default mode-line-format (list " " mode-line-modified  " %b "
                                        '(:eval (when (ignore-errors (projectile-project-root)) (concat "[" (projectile-project-name) "]")))
                                        " === %l:%p {%m}" cider-mode-line))
-  (load-theme 'sanityinc-tomorrow-fmnoise t)
   (setq base16-theme-256-color-source 'colors)
+  (load-theme 'nord t)
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/modes ()
