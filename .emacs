@@ -844,6 +844,8 @@ With negative N, comment out original line and use the absolute value."
 
 (defun init/keybindings-ui ()
   ;; basic
+  (global-unset-key (kbd "ESC ESC ESC"))
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "s-c") 'copy-region-or-sexp)
   (global-set-key (kbd "s-C") 'copy-surrounding-sexp)
   (global-set-key (kbd "s-D") 'sp-clone-sexp-noindent)
