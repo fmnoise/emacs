@@ -567,6 +567,7 @@ With negative N, comment out original line and use the absolute value."
     (define-key magit-status-mode-map (kbd "M-<tab>") 'next-multiframe-window))
 
   (global-set-key (kbd "M-# b") 'magit-blame)
+  (global-set-key (kbd "s-b")   'magit-blame)
   (global-set-key (kbd "M-'")   'toggle-magit-status)
   (global-set-key (kbd "M-G")   'github-browse-file)
   (global-set-key (kbd "M-Z")   'magit-diff-buffer-file))
