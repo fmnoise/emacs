@@ -901,6 +901,11 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "s-C-<left>")  'backward-word)
   (global-set-key (kbd "s-C-<right>")  'forward-word)
 
+  ;; perspective
+  (global-set-key (kbd "M-s-<right>")  'persp-next)
+  (global-set-key (kbd "M-s-<left>")  'persp-prev)
+  (global-set-key (kbd "C-`")  'persp-switch)
+
   ;; USED??
   (global-set-key (kbd "s-j")   'bookmark-set)
   (global-set-key (kbd "s-J")   'bookmark-bmenu-list)
