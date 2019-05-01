@@ -10,12 +10,20 @@
 
   (setq my-packages
         '(
+          ;; themes
           zenburn-theme
           color-theme-sanityinc-tomorrow
           plan9-theme
           atom-one-dark-theme
           planet-theme
+          nord-theme
+
+          ;; syntax
           clojure-mode
+          markdown-mode
+          yaml-mode
+          dockerfile-mode
+
           company
           cider
           paredit
@@ -42,10 +50,8 @@
           s
           hydra
           which-key
-          markdown-mode
-          yaml-mode
-          dockerfile-mode
           perspective
+          exec-path-from-shell
           ))
 
   (dolist (pkg my-packages)
