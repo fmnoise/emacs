@@ -925,10 +925,6 @@ With negative N, comment out original line and use the absolute value."
 (defun init/ui ()
   (require 'projectile)
   (set-default-font "CamingoCode 17")
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (global-visual-line-mode 1)
-  (when (display-graphic-p) (scroll-bar-mode -1))
   (setq-default mode-line-format (list " " mode-line-modified  " %b "
                                        '(:eval (when (ignore-errors (projectile-project-root)) (concat "[" (projectile-project-name) "]")))
                                        " === %l:%p {%m}" cider-mode-line))
@@ -943,6 +939,11 @@ With negative N, comment out original line and use the absolute value."
   (setq mode-require-final-newline nil)
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+
+  ;; fill path when running in gui mode
+  (when (display-graphic-p)
+    (scroll-bar-mode -1)
+    (exec-path-from-shell-initialize))
 
   (setq create-lockfiles nil)
   (setq backup-directory-alist
@@ -961,6 +962,9 @@ With negative N, comment out original line and use the absolute value."
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
 
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (global-visual-line-mode 1)
   (helm-mode 1)
   (global-company-mode 1)
   (global-eldoc-mode 1)
