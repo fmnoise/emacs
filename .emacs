@@ -852,6 +852,9 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-F s")   'hs-show-all))
 
 (defun init/keybindings-ui ()
+  (setq ns-function-modifier 'hyper)
+  ;;(setq ns-right-command-modifier 'hyper)
+
   ;; basic
   (global-unset-key (kbd "ESC ESC ESC"))
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
