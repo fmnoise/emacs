@@ -940,8 +940,8 @@ With negative N, comment out original line and use the absolute value."
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
-  ;; fill path when running in gui mode
   (when (display-graphic-p)
+    (setq ns-use-thin-smoothing 1)
     (scroll-bar-mode -1)
     (exec-path-from-shell-initialize))
 
