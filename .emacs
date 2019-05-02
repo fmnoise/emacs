@@ -932,6 +932,7 @@ With negative N, comment out original line and use the absolute value."
                                        '(:eval (when (ignore-errors (projectile-project-root)) (concat "[" (projectile-project-name) "]")))
                                        " === %l:%p {%m}" cider-mode-line))
   (setq base16-theme-256-color-source 'colors)
+  (setq nord-comment-brightness 20)
   (load-theme 'nord t)
   (fset 'yes-or-no-p 'y-or-n-p))
 
