@@ -928,10 +928,13 @@ With negative N, comment out original line and use the absolute value."
 
 (defun init/ui ()
   (require 'projectile)
+  (require 'magit)
   (set-default-font "CamingoCode 17")
   (setq-default mode-line-format (list " " mode-line-modified  " %b "
                                        '(:eval (when (ignore-errors (projectile-project-root)) (concat "[" (projectile-project-name) "]")))
-                                       " === %l:%p {%m}" cider-mode-line))
+                                       '(:eval (when (ignore-errors (magit-get-current-branch)) (concat " ⎇  " (magit-get-current-branch))))
+                                       " === %l:%p {%m}"
+                                       '(:eval (when (ignore-errors cider-mode-line) cider-mode-line))))
   (setq base16-theme-256-color-source 'colors)
   (setq nord-comment-brightness 20)
   (setq nord-full-color t)
