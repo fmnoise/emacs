@@ -789,6 +789,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key ivy-minibuffer-map (kbd "M-`") 'kill-this-buffer)
   (global-set-key (kbd "M-# g")   'rgrep)
   (global-set-key (kbd "M-# .")   'search-symbol-at-point)
+  (global-set-key (kbd "M-# >")   'helm-occur)
   (global-set-key (kbd "M-# f")   'helm-do-ag-this-file)
   (global-set-key (kbd "M-# F")   'helm-projectile-ag)
   (global-set-key (kbd "M-# p")   'helm-projectile-find-file)
