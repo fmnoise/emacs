@@ -688,7 +688,7 @@ With negative N, comment out original line and use the absolute value."
 
   (define-key emacs-lisp-mode-map (kbd "RET") 'paredit-newline)
   (define-key emacs-lisp-mode-map (kbd "M-# !!") 'eval-last-sexp)
-  (define-key emacs-lisp-mode-map (kbd "s-<return>") 'eval-last-sexp)
+  (when (display-graphic-p) (define-key emacs-lisp-mode-map (kbd "s-<return>") 'eval-last-sexp))
 
   (require 'expand-region)
   (global-set-key (kbd "M-e") 'er/expand-region)
@@ -704,7 +704,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key paredit-mode-map (kbd "DEL") 'paredit-delete-backward-or-region)
   (define-key paredit-mode-map (kbd "M-DEL") 'paredit-backward-delete-line)
   (define-key paredit-mode-map (kbd "M-# %%") 'paredit-kill-or-delete-region)
-  (define-key paredit-mode-map (kbd "s-<backspace>") 'paredit-kill-or-delete-region)
+  (when (display-graphic-p) (define-key paredit-mode-map (kbd "s-<backspace>") 'paredit-kill-or-delete-region))
 
   (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly)
   (define-key paredit-mode-map (kbd "M-9") 'paredit-wrap-round)
