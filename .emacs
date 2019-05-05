@@ -371,6 +371,8 @@ With negative N, comment out original line and use the absolute value."
   (sp-delete-sexp)
   (yank))
 
+
+;; not used?
 (defun copy-surrounding-sexp ()
   (interactive)
   (let ((cpoint (point)))
@@ -378,6 +380,7 @@ With negative N, comment out original line and use the absolute value."
     (sp-copy-sexp)
     (goto-char cpoint)))
 
+;; not used?
 (defun kill-surrounding-sexp ()
   (interactive)
   (paredit-backward-up)
@@ -772,7 +775,8 @@ With negative N, comment out original line and use the absolute value."
 (defun init/keybindings ()
   ;; basic
   (global-set-key (kbd "M-c")     'copy-region-or-sexp)
-  (global-set-key (kbd "M-C")     'copy-surrounding-sexp)
+  ;;(global-set-key (kbd "M-C")     'copy-surrounding-sexp)
+  (global-set-key (kbd "M-C")     'paredit-copy-as-kill)
   (global-set-key (kbd "M-# D")   'sp-clone-sexp-noindent)
   (global-set-key (kbd "M-# V")   'paste-sexp-with-replace)
   (global-set-key (kbd "M-# v")   'paste-with-replace)
