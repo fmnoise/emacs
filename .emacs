@@ -171,9 +171,12 @@
 
 (defun search-symbol-at-point ()
   (interactive)
-  ;; FIXME - select-sexp-at-point kills custom indentation
-  (select-sexp-at-point)
+  (setq helm-ag-insert-at-point 'symbol)
   (helm-projectile-ag))
+
+(defun search-symbol-at-point-in-current-buffer ()
+  (interactive)
+  (helm-swoop :$query (thing-at-point 'symbol t)))
 
 (defun re-frame-jump-to-reg () ;; https://github.com/oliyh/re-jump.el
   (interactive)
@@ -801,7 +804,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key ivy-minibuffer-map (kbd "M-`") 'kill-this-buffer)
   (global-set-key (kbd "M-# g")   'rgrep)
   (global-set-key (kbd "M-# .")   'search-symbol-at-point)
-  (global-set-key (kbd "M-# >")   'helm-occur)
+  (global-set-key (kbd "M-# >")   'search-symbol-at-point-in-current-buffer)
   (global-set-key (kbd "M-# f")   'helm-do-ag-this-file)
   (global-set-key (kbd "M-# F")   'helm-projectile-ag)
   (global-set-key (kbd "M-# p")   'helm-projectile-find-file)
