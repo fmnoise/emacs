@@ -35,6 +35,7 @@
           helm-themes
           helm-ag
           helm-projectile
+          helm-swoop
           neotree
           projectile
           undo-tree
