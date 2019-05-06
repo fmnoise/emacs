@@ -948,7 +948,7 @@ With negative N, comment out original line and use the absolute value."
                                        '(:eval (when (ignore-errors (projectile-project-root)) (concat "[" (projectile-project-name) "]")))
                                        '(:eval (when (ignore-errors (magit-get-current-branch)) (concat " ⎇  " (magit-get-current-branch))))
                                        " === %l:%p {%m}"
-                                       '(:eval (when (ignore-errors cider-mode-line) cider-mode-line))))
+                                       '(:eval (when (ignore-errors (cider-current-repl)) (concat " ⇄ " (cider--modeline-info))))))
   (setq base16-theme-256-color-source 'colors)
   (setq nord-comment-brightness 20)
   (setq nord-full-color t)
