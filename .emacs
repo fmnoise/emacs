@@ -978,6 +978,7 @@ With negative N, comment out original line and use the absolute value."
         '(("" . "~/.emacs.d/backup")))
   (setq auto-save-file-name-transforms
         `((".*" "~/.emacs.d/backup/" t)))
+  (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-mode))
 
   (setq neo-smart-open t)
   (setq-default neo-show-hidden-files t)
