@@ -966,6 +966,7 @@ With negative N, comment out original line and use the absolute value."
   (when (display-graphic-p)
     (setq ns-use-thin-smoothing 1)
     (scroll-bar-mode -1)
+    (global-visual-line-mode 1)
     (exec-path-from-shell-initialize))
 
   (setq create-lockfiles nil)
@@ -988,7 +989,6 @@ With negative N, comment out original line and use the absolute value."
 
   (menu-bar-mode -1)
   (tool-bar-mode -1)
-  (global-visual-line-mode 1)
   (helm-mode 1)
   (global-company-mode 1)
   (global-eldoc-mode 1)
