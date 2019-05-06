@@ -617,7 +617,7 @@ With negative N, comment out original line and use the absolute value."
   (dolist (checkers '((clj-kondo-clj . clojure-joker)
                       (clj-kondo-cljs . clojurescript-joker)
                       (clj-kondo-cljc . clojure-joker)))
-    (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))
+    (flycheck-add-next-checker (car checkers) (cons t (cdr checkers))))
 
   (flycheck-mode 1)
   (paredit-mode 1)
