@@ -786,7 +786,7 @@ With negative N, comment out original line and use the absolute value."
 
   (global-set-key (kbd "M-# s")   'save-buffer) ;; TODO clean selection
   (global-set-key (kbd "M-# R")   'revert-buffer-no-confirm)
-  (global-set-key (kbd "M-`")     'keyboard-quit)
+  ;; (global-set-key (kbd "M-`")     'keyboard-quit)   ;; not used
   (global-set-key (kbd "M-# /")   'toggle-comment)
   (global-set-key (kbd "M-# }")   'indent-rigidly-right)
   (global-set-key (kbd "M-# {")   'indent-rigidly-left)
@@ -800,7 +800,7 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-# \"")  'ivy-resume)
   (global-set-key (kbd "M-# S")   'swiper)
   (global-set-key (kbd "M-# +S")  'counsel-projectile-ag)
-  (define-key ivy-minibuffer-map (kbd "M-`") 'kill-this-buffer)
+  ;;(define-key ivy-minibuffer-map (kbd "M-`") 'kill-this-buffer)   ;; not used
   (global-set-key (kbd "M-# g")   'rgrep)
   (global-set-key (kbd "M-# .")   'search-symbol-at-point)
   (global-set-key (kbd "M-# >")   'helm-occur)
