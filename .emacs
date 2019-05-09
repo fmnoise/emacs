@@ -162,12 +162,6 @@
             (backward-char)
             (clj/toggle-keyword-string)))))))
 
-(defun clj/ignore ()
-  (interactive)
-  (when (not (string-equal (string (following-char)) "(")) ;; TODO {} []
-    (paredit-backward-up))
-  (insert "#_"))
-
 (defun search-symbol-at-point ()
   (interactive)
   (setq helm-ag-insert-at-point 'symbol)
@@ -385,17 +379,6 @@ With negative N, comment out original line and use the absolute value."
   (interactive)
   (kill-ring-save (point-min) (point-max))
   (message "Buffer copied to clipboard!"))
-
-;; USED?
-(defun copy-file-name-to-clipboard ()
-  "Copy the current buffer file name to the clipboard."
-  (interactive)
-  (let ((filename (if (equal major-mode 'dired-mode)
-                      default-directory
-                    (buffer-file-name))))
-    (when filename
-      (kill-new filename)
-      (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 (defun new-empty-buffer ()
   "Create a new buffer called untitled"
@@ -858,10 +841,7 @@ With negative N, comment out original line and use the absolute value."
             (lambda()
               ;; M-RET is consistent with counsel-ag behavior
               (define-key helm-buffer-map (kbd "M-RET") 'helm-execute-persistent-action)
-              (define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)
-              ;;(define-key helm-buffer-map (kbd "M-`") 'helm-keyboard-quit) ;; not used
-              ;;(define-key helm-map (kbd "M-`") 'helm-keyboard-quit) ;; not used
-              ))
+              (define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)))
 
   ;; hide/show
   (global-set-key (kbd "C-\\")    'hs-toggle-hiding)
