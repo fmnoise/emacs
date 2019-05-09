@@ -527,26 +527,6 @@ With negative N, comment out original line and use the absolute value."
     (cider-interactive-eval
      "(reset)")))
 
-(defun init/extensions ()
-  (with-eval-after-load 'company
-    (define-key company-active-map [left] #'company-abort))
-
-  (add-to-list 'auto-mode-alist '("\\.html\\'" . sgml-mode))
-
-  (require 'hideshow)
-  (require 'sgml-mode)
-
-  (add-to-list 'hs-special-modes-alist
-               '(sgml-mode
-                 "<!--\\|<[^/>]*[^/]>"
-                 "-->\\|</[^/>]*[^/]>"
-
-                 "<!--"
-                 sgml-skip-tag-forward
-                 nil))
-
-  (add-hook 'sgml-mode-hook 'hs-minor-mode))
-
 (defun init/git ()
   (require 'magit)
   (setq github-browse-file-show-line-at-point 1)
@@ -843,6 +823,10 @@ With negative N, comment out original line and use the absolute value."
               (define-key helm-buffer-map (kbd "M-RET") 'helm-execute-persistent-action)
               (define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)))
 
+  ;; company
+  (with-eval-after-load 'company
+    (define-key company-active-map [left] #'company-abort))
+
   ;; hide/show
   (global-set-key (kbd "C-\\")    'hs-toggle-hiding)
   (global-set-key (kbd "M-F h")   'hs-hide-all)
@@ -945,6 +929,21 @@ With negative N, comment out original line and use the absolute value."
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
+  (require 'hideshow)
+  (require 'sgml-mode)
+
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . sgml-mode))
+  (add-to-list 'hs-special-modes-alist
+               '(sgml-mode
+                 "<!--\\|<[^/>]*[^/]>"
+                 "-->\\|</[^/>]*[^/]>"
+
+                 "<!--"
+                 sgml-skip-tag-forward
+                 nil))
+
+  (add-hook 'sgml-mode-hook 'hs-minor-mode)
+
   (when (display-graphic-p)
     (setq ns-use-thin-smoothing 1)
     (scroll-bar-mode -1)
@@ -960,6 +959,7 @@ With negative N, comment out original line and use the absolute value."
 
   (setq neo-smart-open t)
   (setq-default neo-show-hidden-files t)
+
   ;; helm
   (setq helm-always-two-windows nil)
   (setq helm-display-buffer-default-height 15)
@@ -1002,7 +1002,6 @@ With negative N, comment out original line and use the absolute value."
   (init/hooks)
   (init/git)
   (init/multiple-cursors)
-  (init/lisp)
-  (init/extensions))
+  (init/lisp))
 
 (init/setup)
