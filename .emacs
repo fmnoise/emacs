@@ -856,10 +856,12 @@ With negative N, comment out original line and use the absolute value."
   (require 'helm-buffers)
   (add-hook 'helm-after-initialize-hook
             (lambda()
-              (define-key helm-buffer-map (kbd "TAB") 'helm-execute-persistent-action)
-              (define-key helm-map (kbd "TAB") 'helm-execute-persistent-action)
-              (define-key helm-buffer-map (kbd "M-`") 'helm-keyboard-quit)
-              (define-key helm-map (kbd "M-`") 'helm-keyboard-quit)))
+              ;; M-RET is consistent with counsel-ag behavior
+              (define-key helm-buffer-map (kbd "M-RET") 'helm-execute-persistent-action)
+              (define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)
+              ;;(define-key helm-buffer-map (kbd "M-`") 'helm-keyboard-quit) ;; not used
+              ;;(define-key helm-map (kbd "M-`") 'helm-keyboard-quit) ;; not used
+              ))
 
   ;; hide/show
   (global-set-key (kbd "C-\\")    'hs-toggle-hiding)
