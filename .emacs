@@ -23,6 +23,7 @@
           markdown-mode
           yaml-mode
           dockerfile-mode
+          swift-mode
 
           company
           cider
