@@ -921,7 +921,7 @@ With negative N, comment out original line and use the absolute value."
   (setq base16-theme-256-color-source 'colors)
   (setq nord-comment-brightness 20)
   (setq nord-full-color t)
-  (load-theme 'nord t)
+  (load-theme 'fmnoise-dark t)
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/modes ()
