@@ -576,15 +576,24 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-|")  'mc-cursors-on)
   (global-set-key (kbd "M-\\") 'mc-cursors-off))
 
-(defun clojure-hook ()
+(defun setup-clojure-linters ()
   (require 'flycheck-clj-kondo)
   (require 'flycheck-joker)
+
+  (dolist (checker '(clj-kondo-clj clj-kondo-cljs clj-kondo-cljc clj-kondo-edn))
+    (setq flycheck-checkers (cons checker (delq checker flycheck-checkers))))
+
   (dolist (checkers '((clj-kondo-clj . clojure-joker)
                       (clj-kondo-cljs . clojurescript-joker)
-                      (clj-kondo-cljc . clojure-joker)))
-    (flycheck-add-next-checker (car checkers) (cons t (cdr checkers))))
+                      (clj-kondo-cljc . clojure-joker)
+                      (clj-kondo-edn . edn-joker)))
+    (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))
 
-  (flycheck-mode 1)
+  (define-key clojure-mode-map (kbd "M-# e") 'flycheck-list-errors)
+  (flycheck-mode 1))
+
+(defun clojure-hook ()
+  (setup-clojure-linters)
   (paredit-mode 1)
   (cider-mode 1)
   (rainbow-delimiters-mode 1)
@@ -601,7 +610,6 @@ With negative N, comment out original line and use the absolute value."
     (define-key clojure-mode-map (kbd "s-<return>")   'cider-eval-toplevel-sexp)
     (define-key clojure-mode-map (kbd "S-<return>")  'cider-eval-sexp-at-point))
 
-  (define-key clojure-mode-map (kbd "M-# e") 'flycheck-list-errors)
   (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
 
