@@ -583,11 +583,11 @@ With negative N, comment out original line and use the absolute value."
   (dolist (checker '(clj-kondo-clj clj-kondo-cljs clj-kondo-cljc clj-kondo-edn))
     (setq flycheck-checkers (cons checker (delq checker flycheck-checkers))))
 
-  (dolist (checkers '((clj-kondo-clj . clojure-joker)
-                      (clj-kondo-cljs . clojurescript-joker)
-                      (clj-kondo-cljc . clojure-joker)
-                      (clj-kondo-edn . edn-joker)))
-    (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))
+  ;; (dolist (checkers '((clj-kondo-clj . clojure-joker)
+  ;;                     (clj-kondo-cljs . clojurescript-joker)
+  ;;                     (clj-kondo-cljc . clojure-joker)
+  ;;                     (clj-kondo-edn . edn-joker)))
+  ;;   (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))
 
   (define-key clojure-mode-map (kbd "M-# e") 'flycheck-list-errors)
   (flycheck-mode 1))
