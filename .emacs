@@ -653,6 +653,7 @@ With negative N, comment out original line and use the absolute value."
          (figwheel-sidecar.repl-api/cljs-repl))")
 
   (add-hook 'clojure-mode-hook #'clojure-hook)
+  (add-hook 'clojurescript-mode-hook #'clojure-hook)
 
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
