@@ -208,6 +208,19 @@
               (goto-char cpoint))
           (message "File doesn't exist: %s" filename))))))
 
+;; TODO
+(defun to-kebab ()
+  (interactive))
+
+(defun to-camel ()
+  (interactive))
+
+(defun to-snake ()
+  (interactive))
+
+(defun to-env ()
+  (interactive))
+
 (defun sp-clone-sexp-noindent ()
   (interactive)
   (require 'smartparens)
