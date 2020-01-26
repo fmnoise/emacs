@@ -768,8 +768,8 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-# A")   'mark-whole-buffer)
 
   (require 'undo-tree)
-  (global-set-key (kbd "M-# z")   (lambda () (interactive) (deactivate-mark) (undo-tree-undo)))
-  (global-set-key (kbd "M-# Z")   (lambda () (interactive) (deactivate-mark) (undo-tree-redo)))
+  (global-set-key (kbd "M-# z")   (lambda () (interactive) (undo-tree-undo) (deactivate-mark)))
+  (global-set-key (kbd "M-# Z")   (lambda () (interactive)  (undo-tree-redo) (deactivate-mark)))
 
   (global-set-key (kbd "M-# s")   'save-buffer) ;; TODO clean selection
   (global-set-key (kbd "M-# R")   'revert-buffer-no-confirm)
