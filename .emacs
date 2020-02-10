@@ -755,6 +755,8 @@ With negative N, comment out original line and use the absolute value."
 ;; ---------KEYS IN ESC SEQ------------
 
 (defun init/keybindings ()
+  (global-unset-key (kbd "<f10>")) ;; disable menu-bar
+
   ;; basic
   (global-set-key (kbd "M-c")     'copy-region-or-sexp)
   ;;(global-set-key (kbd "M-C")     'copy-surrounding-sexp)
