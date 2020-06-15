@@ -25,6 +25,7 @@
           yaml-mode
           dockerfile-mode
           swift-mode
+          kotlin-mode
 
           company
           cider
