@@ -541,7 +541,7 @@ With negative N, comment out original line and use the absolute value."
 (defun clojure/reset-reloaded-repl ()
   (interactive)
   (save-some-buffers)
-  (with-current-buffer (cider-current-repl-buffer)
+  (with-current-buffer (cider-current-connection)
     (cider-interactive-eval
      "(reset)")))
 
