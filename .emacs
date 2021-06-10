@@ -943,7 +943,7 @@ With negative N, comment out original line and use the absolute value."
 (setq start-night-hour 20)
 
 (defun synchronize-theme ()
-  ;; noticed that some colors are not correctly with load-theme
+  ;; noticed that some colors are not correctly updated with load-theme
   ;; so decided to switch to helm-themes which does that correctly
   (require 'helm-themes)
   (if (< start-day-hour (string-to-number (format-time-string "%H")) start-night-hour)
