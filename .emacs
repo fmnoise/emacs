@@ -937,10 +937,18 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "s-'")   'helm-resume)
 )
 
+(setq day-theme "sanityinc-tomorrow-day") ; "plan9"
+(setq night-theme "sanityinc-tomorrow-bright")
+(setq start-day-hour 8)
+(setq start-night-hour 20)
+
 (defun synchronize-theme ()
-  (if (< 8 (string-to-number (format-time-string "%H")) 20)
-    (load-theme 'plan9 t)
-    (load-theme 'sanityinc-tomorrow-bright t)))
+  ;; noticed that some colors are not correctly with load-theme
+  ;; so decided to switch to helm-themes which does that correctly
+  (require 'helm-themes)
+  (if (< start-day-hour (string-to-number (format-time-string "%H")) start-night-hour)
+    (helm-themes--load-theme day-theme)
+    (helm-themes--load-theme night-theme)))
 
 (defun init/ui ()
   (require 'projectile)
