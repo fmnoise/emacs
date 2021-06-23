@@ -939,6 +939,7 @@ With negative N, comment out original line and use the absolute value."
 
 (setq day-theme "sanityinc-tomorrow-day") ; "plan9"
 (setq night-theme "sanityinc-tomorrow-bright")
+(setq current-theme "")
 (setq start-day-hour 8)
 (setq start-night-hour 20)
 
@@ -947,8 +948,12 @@ With negative N, comment out original line and use the absolute value."
   ;; so decided to switch to helm-themes which does that correctly
   (require 'helm-themes)
   (if (< start-day-hour (string-to-number (format-time-string "%H")) start-night-hour)
-    (helm-themes--load-theme day-theme)
-    (helm-themes--load-theme night-theme)))
+      (when (not (eq current-theme day-theme))
+        (setq current-theme day-theme)
+        (helm-themes--load-theme day-theme))
+      (when (not (eq current-theme night-theme))
+        (setq current-theme night-theme)
+        (helm-themes--load-theme night-theme))))
 
 (defun init/ui ()
   (require 'projectile)
