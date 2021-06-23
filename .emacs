@@ -543,7 +543,7 @@ With negative N, comment out original line and use the absolute value."
   (save-some-buffers)
   (with-current-buffer (cider-current-connection)
     (cider-interactive-eval
-     "(reset)")))
+     "(reset-all)"))) ;; "(reset)"
 
 (defun init/git ()
   (require 'magit)
