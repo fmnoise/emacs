@@ -548,6 +548,7 @@ With negative N, comment out original line and use the absolute value."
 (defun init/git ()
   (require 'magit)
   (setq github-browse-file-show-line-at-point 1)
+  (transient-bind-q-to-quit)
   (magit-add-section-hook 'magit-status-sections-hook
                           'magit-insert-unpushed-to-upstream
                           'magit-insert-unpushed-to-upstream-or-recent
