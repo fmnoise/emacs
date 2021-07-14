@@ -958,7 +958,7 @@ With negative N, comment out original line and use the absolute value."
 (defun init/ui ()
   (require 'projectile)
   (require 'magit)
-  (set-default-font "CamingoCode 17")
+  (set-frame-font "CamingoCode 17")
   (setq-default mode-line-format (list " " mode-line-modified  " %b "
                                        '(:eval (when (ignore-errors (projectile-project-root)) (concat "[" (projectile-project-name) "]")))
                                        '(:eval (when (ignore-errors (magit-get-current-branch)) (concat " ⎇  " (magit-get-current-branch))))
