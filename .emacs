@@ -824,8 +824,6 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-# N")   (lambda () (interactive) (new-empty-buffer) (clojure-mode)))
 
   ;; navigation/selection
-  (global-set-key (kbd "M-m") 'set-mark-command)
-  (global-set-key (kbd "M-# */") 'set-mark-command)
   (global-set-key (kbd "M-# @^")  'backward-paragraph)
   (global-set-key (kbd "M-# @v") 'forward-paragraph)
 
@@ -845,7 +843,6 @@ With negative N, comment out original line and use the absolute value."
   ;; helm
   (global-set-key (kbd "M-x")     'helm-M-x)
   (global-set-key (kbd "M-# ~")   'helm-buffers-list)
-  (global-set-key (kbd "M-* __")  'helm-buffers-list)
   (global-set-key (kbd "M-# '")   'helm-resume)
   (global-set-key (kbd "C-t")     'helm-themes)
   (require 'helm-buffers)
