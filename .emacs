@@ -938,7 +938,7 @@ With negative N, comment out original line and use the absolute value."
 (setq day-theme "sanityinc-tomorrow-day") ; "plan9"
 (setq night-theme "sanityinc-tomorrow-bright")
 (setq current-theme "")
-(setq start-day-hour 8)
+(setq start-day-hour 7)
 (setq start-night-hour 20)
 
 (defun synchronize-theme ()
