@@ -931,7 +931,6 @@ With negative N, comment out original line and use the absolute value."
 
   ;; helm
   (global-set-key (kbd "s-`")   'helm-buffers-list)
-  (global-set-key (kbd "C-<tab>")  'helm-buffers-list)
   (global-set-key (kbd "s-'")   'helm-resume)
 )
 
