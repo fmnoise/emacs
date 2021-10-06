@@ -953,6 +953,11 @@ With negative N, comment out original line and use the absolute value."
     (switch-theme day-theme)
     (switch-theme night-theme)))
 
+(defun sync-theme-to-osx ()
+  (if (string= (shell-command-to-string "printf %s \"$( osascript -e \'tell application \"System Events\" to tell appearance preferences to return dark mode\' )\"")
+               "true")
+    (switch-theme night-theme)
+    (switch-theme day-theme)))
 
 (defun init/ui ()
   (require 'projectile)
@@ -967,7 +972,7 @@ With negative N, comment out original line and use the absolute value."
   (setq base16-theme-256-color-source 'colors)
   (setq nord-comment-brightness 20)
   (setq nord-full-color t)
-  (run-with-timer 0 60 'synchronize-theme)
+  (run-with-timer 0 1 'sync-theme-to-osx)
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/modes ()
