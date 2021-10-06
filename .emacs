@@ -940,17 +940,19 @@ With negative N, comment out original line and use the absolute value."
 (setq start-day-hour 7)
 (setq start-night-hour 20)
 
-(defun synchronize-theme ()
+(defun switch-theme (theme)
   ;; noticed that some colors are not correctly updated with load-theme
   ;; so decided to switch to helm-themes which does that correctly
   (require 'helm-themes)
+  (when (not (eq current-theme theme))
+    (setq current-theme theme)
+    (helm-themes--load-theme theme)))
+
+(defun synchronize-theme ()
   (if (< start-day-hour (string-to-number (format-time-string "%H")) start-night-hour)
-      (when (not (eq current-theme day-theme))
-        (setq current-theme day-theme)
-        (helm-themes--load-theme day-theme))
-      (when (not (eq current-theme night-theme))
-        (setq current-theme night-theme)
-        (helm-themes--load-theme night-theme))))
+    (switch-theme day-theme)
+    (switch-theme night-theme)))
+
 
 (defun init/ui ()
   (require 'projectile)
