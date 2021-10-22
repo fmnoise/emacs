@@ -972,7 +972,7 @@ With negative N, comment out original line and use the absolute value."
   (setq base16-theme-256-color-source 'colors)
   (setq nord-comment-brightness 20)
   (setq nord-full-color t)
-  (run-with-timer 0 1 'sync-theme-to-osx)
+  (run-with-timer 0 600 'sync-theme-to-osx)
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/modes ()
