@@ -1013,6 +1013,7 @@ With negative N, comment out original line and use the absolute value."
 
   (setq neo-smart-open t)
   (setq-default neo-show-hidden-files t)
+  (setq neo-theme 'arrow)
 
   ;; helm
   (setq helm-always-two-windows nil)
