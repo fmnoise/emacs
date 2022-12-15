@@ -934,8 +934,8 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "s-'")   'helm-resume)
 )
 
-(setq day-theme "base16-fmnoise") ; "sanityinc-tomorrow-day" "plan9"
-(setq night-theme "fmnoise-dark") ; "sanityinc-tomorrow-bright"
+(setq day-theme "cloud") ; "base16-fmnoise"
+(setq night-theme "planet") ; "fmnoise-dark"
 (setq current-theme "")
 (setq start-day-hour 7)
 (setq start-night-hour 20)
