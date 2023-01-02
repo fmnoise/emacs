@@ -986,6 +986,9 @@ With negative N, comment out original line and use the absolute value."
   (require 'hideshow)
   (require 'sgml-mode)
 
+  (setq helm-ag-command-option "--hidden")
+  (setq counsel-ag-base-command "ag --nocolor --nogroup --hidden %s")
+
   (add-to-list 'auto-mode-alist '("\\.html\\'" . sgml-mode))
   (add-to-list 'hs-special-modes-alist
                '(sgml-mode
