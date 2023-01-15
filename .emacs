@@ -16,6 +16,8 @@
           ;; themes
           zenburn-theme
           color-theme-sanityinc-tomorrow
+          railscasts-reloaded-theme
+          cloud-theme
           plan9-theme
           atom-one-dark-theme
           planet-theme
