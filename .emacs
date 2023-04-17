@@ -854,6 +854,8 @@ With negative N, comment out original line and use the absolute value."
   (require 'helm-buffers)
   (add-hook 'helm-after-initialize-hook
             (lambda()
+              ;; just a reminder because I always forget
+              ;; go to code from swiper/find - Alt + Enter
               ;; M-RET is consistent with counsel-ag behavior
               (define-key helm-buffer-map (kbd "M-RET") 'helm-execute-persistent-action)
               (define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)))
