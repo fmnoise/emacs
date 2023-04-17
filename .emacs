@@ -22,6 +22,7 @@
           atom-one-dark-theme
           planet-theme
           nord-theme
+          gruvbox-theme
 
           ;; syntax
           clojure-mode
@@ -30,6 +31,8 @@
           dockerfile-mode
           swift-mode
           kotlin-mode
+          rust-mode
+          cargo-mode
 
           company
           cider
