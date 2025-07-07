@@ -2,7 +2,9 @@
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
           ;;("marmalade" . "http://marmalade-repo.org/packages/")
-          ("melpa" . "http://melpa.org/packages/")))
+          ("melpa-stable" . "https://stable.melpa.org/packages/")
+          ;;("melpa" . "http://melpa.org/packages/")
+          ))
 
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
   (setq package-check-signature nil)
