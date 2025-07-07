@@ -525,9 +525,9 @@ With negative N, comment out original line and use the absolute value."
   (interactive)
   (let ((curpoint (point)))
     (when (= (line-beginning-position) (line-end-position))
-      (goto-char (cl-decf (point))))
+      (goto-char (1- (point))))
     (when (< (point) (line-end-position))
-      (goto-char (cl-incf (point))))
+      (goto-char (1+ (point))))
     (while (and
             (> (point) (line-beginning-position))
             (not
