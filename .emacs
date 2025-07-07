@@ -287,8 +287,8 @@ With negative N, comment out original line and use the absolute value."
 ;; https://emacs.stackexchange.com/questions/29664/how-to-do-paredit-kill-backwards
 (defun paredit-backward-delete-line ()
   "Delete line backwards, preserving delimiters and not adding to the kill ring."
-  (require 'paredit)
   (interactive)
+  (require 'paredit)
   (setq-local paredit--started-in-string-p (paredit-in-string-p))
   (setq-local paredit--backward-region-p nil)
   (if (or (and (not (paredit-in-char-p (1- (point))))
@@ -496,15 +496,15 @@ With negative N, comment out original line and use the absolute value."
   (yank))
 
 (defun paredit-delete-backward-or-region ()
-  (require 'paredit)
   (interactive)
+  (require 'paredit)
   (if (and transient-mark-mode mark-active)
     (paredit-delete-region (region-beginning) (region-end)) ;;(delete-active-region)
     (paredit-backward-delete)))
 
 (defun paredit-kill-or-delete-region ()
-  (require 'paredit)
   (interactive)
+  (require 'paredit)
   (if (and transient-mark-mode mark-active)
     (delete-active-region) ;;(paredit-kill-region)
     (paredit-kill)))
