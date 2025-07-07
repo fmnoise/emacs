@@ -1040,6 +1040,7 @@ With negative N, comment out original line and use the absolute value."
   (tool-bar-mode -1)
   (helm-mode 1)
   (global-company-mode 1)
+  (global-undo-tree-mode 1)
   (global-eldoc-mode 1)
   (global-highlight-parentheses-mode 1)
   (rainbow-delimiters-mode 1)
