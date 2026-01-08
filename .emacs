@@ -1,6 +1,7 @@
 (defun init/packages ()
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
+          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
           ;;("marmalade" . "http://marmalade-repo.org/packages/")
           ("melpa-stable" . "https://stable.melpa.org/packages/")
           ;;("melpa" . "http://melpa.org/packages/")
@@ -36,6 +37,7 @@
           rust-mode
           cargo-mode
 
+          eat ;; nongnu
           company
           cider
           paredit
