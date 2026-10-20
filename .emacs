@@ -179,9 +179,11 @@
             (clj/toggle-keyword-string)))))))
 
 (defun search-symbol-at-point ()
+  "Search the project with the symbol at point as initial input."
   (interactive)
-  (setq helm-ag-insert-at-point 'symbol)
-  (helm-projectile-ag))
+  (require 'helm-ag)
+  (let ((helm-ag-insert-at-point 'symbol))
+    (helm-do-ag (projectile-project-root))))
 
 (defun re-frame-jump-to-reg () ;; https://github.com/oliyh/re-jump.el
   (interactive)
@@ -1003,8 +1005,9 @@ With negative N, comment out original line and use the absolute value."
   (require 'hideshow)
   (require 'sgml-mode)
 
-  (setq helm-ag-command-option "--hidden")
-  (setq counsel-ag-base-command "ag --nocolor --nogroup --hidden %s")
+  ;; (setq helm-ag-command-option "--hidden")
+  ;; (setq counsel-ag-base-command "ag --nocolor --nogroup --hidden %s")
+  (setq helm-grep-ag-command "ag --line-numbers -S --color --nogroup %s -- %s %s")
 
   (add-to-list 'auto-mode-alist '("\\.html\\'" . sgml-mode))
   (add-to-list 'hs-special-modes-alist
