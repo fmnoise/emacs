@@ -1,3 +1,4 @@
+;; -*- lexical-binding: nil; -*-
 (defun init/packages ()
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -208,17 +209,17 @@
            )))
 
 (defun jump-to-current-version ()
+  "Open the current project file corresponding to a versioned buffer."
   (interactive)
-  (when (fboundp 'projectile-project-root)
-    (when-let ((name (buffer-name)))
-      (let ((cpoint (point))
-            (filename (concat (projectile-project-root)
-                              (car (split-string name ".~")))))
-        (if (file-exists-p filename)
-            (progn
-              (find-file filename)
-              (goto-char cpoint))
-          (message "File doesn't exist: %s" filename))))))
+  (let* ((cpoint (point))
+         (name (car (split-string (buffer-name) "\\.~")))
+         (filename (expand-file-name
+                    name (projectile-project-root))))
+    (if (file-exists-p filename)
+        (progn
+          (find-file filename)
+          (goto-char (min cpoint (point-max))))
+      (message "File doesn't exist: %s" filename))))
 
 ;; TODO
 (defun to-kebab ()
@@ -382,11 +383,12 @@ With negative N, comment out original line and use the absolute value."
             (kill-append sp-last-kill-whitespace nil))))))))
 
 (defun paste-sexp-with-replace ()
-  "Deletes selected sexp and pastes previously copied one"
+  "Replace the following sexp with the current kill-ring entry."
   (interactive)
-  (sp-delete-sexp)
-  (yank))
-
+  (let ((text (current-kill 0 t)))
+    (atomic-change-group
+      (sp-delete-sexp)
+      (insert-for-yank text))))
 
 ;; not used?
 (defun copy-surrounding-sexp ()
@@ -616,6 +618,7 @@ With negative N, comment out original line and use the absolute value."
   ;;                     (clj-kondo-edn . edn-joker)))
   ;;   (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))
 
+  (setq flycheck-indication-mode nil)
   (define-key clojure-mode-map (kbd "M-# e") 'flycheck-list-errors)
   (flycheck-mode 1))
 
@@ -1040,11 +1043,13 @@ With negative N, comment out original line and use the absolute value."
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
 
+  (global-undo-tree-mode 1)
+  (setq undo-tree-auto-save-history nil)
+
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (helm-mode 1)
   (global-company-mode 1)
-  (global-undo-tree-mode 1)
   (global-eldoc-mode 1)
   (global-highlight-parentheses-mode 1)
   (rainbow-delimiters-mode 1)
