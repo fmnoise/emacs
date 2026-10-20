@@ -1068,6 +1068,7 @@ With negative N, comment out original line and use the absolute value."
       (add-hook 'post-command-hook 'xterm-title-update)))
 
 (defun init/setup ()
+  (setq warning-minimum-level :error)
   (init/packages)
   (init/clipboard)
   (init/ui)
