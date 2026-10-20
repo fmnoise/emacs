@@ -27,6 +27,7 @@
           planet-theme
           nord-theme
           gruvbox-theme
+          base16-theme
 
           ;; syntax
           clojure-mode
@@ -950,8 +951,8 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "s-'")   'helm-resume)
 )
 
-(setq day-theme "tsdh-light")
-(setq night-theme "gruvbox")
+(setq day-theme "base16-arroz-con-dulce")
+(setq night-theme "base16-arroz-con-dulce-dark")
 (setq current-theme "")
 (setq start-day-hour 7)
 (setq start-night-hour 20)
