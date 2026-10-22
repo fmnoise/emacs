@@ -1024,7 +1024,6 @@ With negative N, comment out original line and use the absolute value."
                  nil))
 
   (add-hook 'sgml-mode-hook 'hs-minor-mode)
-  (add-to-list 'auto-mode-alist '("\\.edn\\'" . clojure-mode))
 
   (when (display-graphic-p)
     (setq ns-use-thin-smoothing 1)
