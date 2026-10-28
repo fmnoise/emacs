@@ -5,7 +5,7 @@
           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
           ;;("marmalade" . "http://marmalade-repo.org/packages/")
           ("melpa-stable" . "https://stable.melpa.org/packages/")
-          ;;("melpa" . "http://melpa.org/packages/")
+          ("melpa" . "http://melpa.org/packages/")
           ))
 
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
@@ -48,7 +48,7 @@
           magit
           zoom-window
           helm
-          helm-themes
+          ;; helm-themes
           helm-ag
           helm-projectile
           neotree
@@ -865,7 +865,8 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "M-x")     'helm-M-x)
   (global-set-key (kbd "M-# ~")   'helm-buffers-list)
   (global-set-key (kbd "M-# '")   'helm-resume)
-  (global-set-key (kbd "C-t")     'helm-themes)
+  (global-set-key (kbd "C-t")     'load-theme)
+
   (require 'helm-buffers)
   (add-hook 'helm-after-initialize-hook
             (lambda()
@@ -957,24 +958,21 @@ With negative N, comment out original line and use the absolute value."
   (global-set-key (kbd "s-'")   'helm-resume)
 )
 
-(setq day-theme "base16-arroz-con-dulce")
-(setq night-theme "base16-arroz-con-dulce-dark")
-(setq current-theme "")
+(setq day-theme 'base16-arroz-con-dulce)
+(setq night-theme 'base16-arroz-con-dulce-dark)
+(setq current-theme nil)
 (setq start-day-hour 7)
 (setq start-night-hour 20)
 
 (defun switch-theme (theme)
   ;; noticed that some colors are not correctly updated with load-theme
   ;; so decided to switch to helm-themes which does that correctly
-  (require 'helm-themes)
+  ;; (require 'helm-themes)
   (when (not (eq current-theme theme))
     (setq current-theme theme)
-    (helm-themes--load-theme theme)))
-
-(defun synchronize-theme ()
-  (if (< start-day-hour (string-to-number (format-time-string "%H")) start-night-hour)
-    (switch-theme day-theme)
-    (switch-theme night-theme)))
+    (load-theme theme t)
+   ;; (helm-themes--load-theme theme)
+))
 
 (defun sync-theme-to-osx ()
   (if (string= (shell-command-to-string "printf %s \"$( osascript -e \'tell application \"System Events\" to tell appearance preferences to return dark mode\' )\"")
@@ -995,7 +993,7 @@ With negative N, comment out original line and use the absolute value."
   (setq base16-theme-256-color-source 'colors)
   (setq nord-comment-brightness 20)
   (setq nord-full-color t)
-  (run-with-timer 0 600 'sync-theme-to-osx)
+  (run-with-timer 0 60 'sync-theme-to-osx)
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/modes ()
@@ -1003,6 +1001,7 @@ With negative N, comment out original line and use the absolute value."
   (setq company-auto-complete t)
   (setq require-final-newline nil)
   (setq mode-require-final-newline nil)
+  (setq custom-safe-themes t)
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
