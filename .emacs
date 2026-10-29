@@ -1,15 +1,14 @@
 ;; -*- lexical-binding: nil; -*-
 (defun init/packages ()
   (setq package-archives
-        '(("gnu" . "http://elpa.gnu.org/packages/")
+        '(("gnu" . "https://elpa.gnu.org/packages/")
           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
           ;;("marmalade" . "http://marmalade-repo.org/packages/")
           ("melpa-stable" . "https://stable.melpa.org/packages/")
-          ("melpa" . "http://melpa.org/packages/")
+          ("melpa" . "https://melpa.org/packages/")
           ))
 
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-  (setq package-check-signature nil)
+  (setq package-check-signature 'allow-unsigned)
 
   (require 'package)
   (package-initialize)
