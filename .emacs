@@ -39,6 +39,7 @@
           rust-mode
           cargo-mode
 
+          agent-shell
           eat ;; nongnu
           company
           cider
@@ -1004,6 +1005,12 @@ With negative N, comment out original line and use the absolute value."
   (setq custom-safe-themes t)
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+
+  (use-package agent-shell
+    :ensure t
+    :config
+    (setq agent-shell-openai-authentication
+          (agent-shell-openai-make-authentication :login t)))
 
   (require 'hideshow)
   (require 'sgml-mode)
