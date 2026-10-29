@@ -971,8 +971,6 @@ With negative N, comment out original line and use the absolute value."
 (setq day-theme 'base16-arroz-con-dulce)
 (setq night-theme 'base16-arroz-con-dulce-dark)
 (setq current-theme nil)
-(setq start-day-hour 7)
-(setq start-night-hour 20)
 
 (defun switch-theme (theme)
   ;; noticed that some colors are not correctly updated with load-theme
