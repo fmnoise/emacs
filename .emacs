@@ -626,6 +626,12 @@ With negative N, comment out original line and use the absolute value."
   (define-key clojure-mode-map (kbd "M-# e") 'flycheck-list-errors)
   (flycheck-mode 1))
 
+(defun my-cider-find-var-at-mouse (event)
+  "Jump to the definition of the symbol at the mouse position."
+  (interactive "e")
+  (mouse-set-point event)
+  (call-interactively #'cider-find-var))
+
 (defun clojure-hook ()
   (setup-clojure-linters)
   (paredit-mode 1)
@@ -643,6 +649,9 @@ With negative N, comment out original line and use the absolute value."
     (define-key clojure-mode-map (kbd "s-S-<return>") 'cider-eval-defun-to-comment)
     (define-key clojure-mode-map (kbd "s-<return>")   'cider-eval-toplevel-sexp)
     (define-key clojure-mode-map (kbd "S-<return>")  'cider-eval-sexp-at-point))
+
+  (define-key clojure-mode-map [S-down-mouse-1] #'my-cider-find-var-at-mouse)
+  (define-key clojure-mode-map [S-mouse-1] #'ignore)
 
   (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
