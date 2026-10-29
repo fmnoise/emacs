@@ -1003,6 +1003,23 @@ With negative N, comment out original line and use the absolute value."
   (run-with-timer 0 60 'sync-theme-to-osx)
   (fset 'yes-or-no-p 'y-or-n-p))
 
+(defun init/agents ()
+  (defvar-keymap my-agent-map)
+
+  (use-package agent-shell
+    :ensure t
+    :bind-keymap ("C-a" . my-agent-map)
+    :config
+    (setq agent-shell-openai-authentication
+          (agent-shell-openai-make-authentication :login t)
+
+          agent-shell-anthropic-authentication
+          (agent-shell-anthropic-make-authentication :login t)))
+
+  (define-key my-agent-map (kbd "a") #'agent-shell)
+  (define-key my-agent-map (kbd "x") #'agent-shell-openai-start-codex)
+  (define-key my-agent-map (kbd "c") #'agent-shell-anthropic-start-claude-code))
+
 (defun init/modes ()
   (setq indent-tabs-mode nil)
   (setq company-auto-complete t)
@@ -1011,12 +1028,6 @@ With negative N, comment out original line and use the absolute value."
   (setq custom-safe-themes t)
   ;; don't make autoident on newline
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
-
-  (use-package agent-shell
-    :ensure t
-    :config
-    (setq agent-shell-openai-authentication
-          (agent-shell-openai-make-authentication :login t)))
 
   (require 'hideshow)
   (require 'sgml-mode)
@@ -1099,6 +1110,7 @@ With negative N, comment out original line and use the absolute value."
   (init/hooks)
   (init/git)
   (init/multiple-cursors)
+  (init/agents)
   (init/lisp))
 
 (init/setup)
