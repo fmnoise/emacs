@@ -386,11 +386,14 @@ With negative N, comment out original line and use the absolute value."
             (kill-append sp-last-kill-whitespace nil))))))))
 
 (defun paste-sexp-with-replace ()
-  "Replace the following sexp with the current kill-ring entry."
+  "Replace the following sexp without changing the clipboard or kill ring."
   (interactive)
   (let ((text (current-kill 0 t)))
     (atomic-change-group
-      (sp-delete-sexp)
+      (let ((kill-ring (copy-sequence kill-ring))
+            (kill-ring-yank-pointer nil)
+            (interprogram-cut-function nil))
+        (sp-delete-sexp))
       (insert-for-yank text))))
 
 ;; not used?
