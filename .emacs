@@ -646,7 +646,7 @@ With negative N, comment out original line and use the absolute value."
   (clj-refactor-mode 1)
 
   (when (display-graphic-p)
-    (define-key clojure-mode-map (kbd "s-r") 'hydra-cljr-help-menu/body)
+    (define-key clojure-mode-map (kbd "s-r") '#'clj-refactor-menu)
     (define-key clojure-mode-map (kbd "C-<return>")  'cider-eval-buffer)
     (define-key clojure-mode-map (kbd "s-S-<return>") 'cider-eval-defun-to-comment)
     (define-key clojure-mode-map (kbd "s-<return>")   'cider-eval-toplevel-sexp)
@@ -655,7 +655,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key clojure-mode-map [S-down-mouse-1] #'my-cider-find-var-at-mouse)
   (define-key clojure-mode-map [S-mouse-1] #'ignore)
 
-  (define-key clojure-mode-map (kbd "M-# r") 'hydra-cljr-help-menu/body)
+  (define-key clojure-mode-map (kbd "M-# r") #'clj-refactor-menu)
   (define-key clojure-mode-map (kbd "M->") 're-frame-jump-to-reg)
 
   (define-key clojure-mode-map (kbd "M-RET '") 'cider-jack-in)
