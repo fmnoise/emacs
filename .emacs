@@ -33,8 +33,6 @@
           markdown-mode
           yaml-mode
           dockerfile-mode
-          swift-mode
-          kotlin-mode
           rust-mode
           cargo-mode
 
@@ -65,7 +63,7 @@
           github-browse-file
           s
           hydra
-          which-key
+          ;; which-key builtin
           perspective
           exec-path-from-shell
           flycheck-clj-kondo
