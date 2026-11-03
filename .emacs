@@ -892,6 +892,8 @@ With negative N, comment out original line and use the absolute value."
               (define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)))
 
   ;; company
+  (add-hook 'git-commit-setup-hook
+            (lambda () (company-mode -1)))
   (with-eval-after-load 'company
     (define-key company-active-map [left] #'company-abort))
 
