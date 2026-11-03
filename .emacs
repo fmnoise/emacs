@@ -892,10 +892,16 @@ With negative N, comment out original line and use the absolute value."
               (define-key helm-map (kbd "M-RET") 'helm-execute-persistent-action)))
 
   ;; company
-  (add-hook 'git-commit-setup-hook
-            (lambda () (company-mode -1)))
+  ;; (add-hook 'git-commit-setup-hook (lambda () (company-mode -1)))
   (with-eval-after-load 'company
-    (define-key company-active-map [left] #'company-abort))
+    (setq company-idle-delay 0.2
+          company-minimum-prefix-length 2
+          company-tooltip-limit 10
+          company-tooltip-align-annotations t
+          company-selection-wrap-around t
+          company-insertion-on-trigger nil)
+    (define-key company-active-map (kbd "TAB") #'company-complete-selection)
+    (define-key company-active-map (kbd "<tab>") #'company-complete-selection))
 
   ;; hide/show
   (global-set-key (kbd "C-\\")    'hs-toggle-hiding)
