@@ -1,4 +1,9 @@
 ;; -*- lexical-binding: nil; -*-
+
+;; Keep automatically saved Custom settings separate from this configuration.
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+;; (load custom-file 'noerror)
+
 (defun init/packages ()
   (setq package-archives
         '(("gnu" . "https://elpa.gnu.org/packages/")
