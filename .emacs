@@ -17,15 +17,15 @@
   (setq my-packages
         '(
           ;; themes
-          zenburn-theme
-          color-theme-sanityinc-tomorrow
-          railscasts-reloaded-theme
-          cloud-theme
-          plan9-theme
-          atom-one-dark-theme
-          planet-theme
-          nord-theme
-          gruvbox-theme
+          ;; zenburn-theme
+          ;; color-theme-sanityinc-tomorrow
+          ;; railscasts-reloaded-theme
+          ;; cloud-theme
+          ;; plan9-theme
+          ;; atom-one-dark-theme
+          ;; planet-theme
+          ;; nord-theme
+          ;; gruvbox-theme
           base16-theme
 
           ;; syntax
