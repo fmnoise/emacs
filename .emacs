@@ -1030,7 +1030,7 @@ With negative N, comment out original line and use the absolute value."
 
 (defun init/modes ()
   (setq indent-tabs-mode nil)
-  (setq company-auto-complete t)
+  (setq company-insertion-on-trigger nil)
   (setq require-final-newline nil)
   (setq mode-require-final-newline nil)
   (setq custom-safe-themes t)
