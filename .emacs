@@ -1035,6 +1035,7 @@ With negative N, comment out original line and use the absolute value."
   (define-key my-agent-map (kbd "c") #'agent-shell-anthropic-start-claude-code))
 
 (defun init/modes ()
+  (mouse-wheel-mode 1)
   (setq indent-tabs-mode nil)
   (setq require-final-newline nil)
   (setq mode-require-final-newline nil)
