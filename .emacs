@@ -1018,11 +1018,11 @@ With negative N, comment out original line and use the absolute value."
   (fset 'yes-or-no-p 'y-or-n-p))
 
 (defun init/agents ()
-  (defvar-keymap my-agent-map)
-
+  ;;(defvar-keymap my-agent-map)
   (use-package agent-shell
     :ensure t
-    :bind-keymap ("C-a" . my-agent-map)
+    ;;:bind-keymap ("C-a" . my-agent-map)
+    :bind ("C-a" . agent-shell)
     :config
     (setq agent-shell-openai-authentication
           (agent-shell-openai-make-authentication :login t)
@@ -1030,9 +1030,10 @@ With negative N, comment out original line and use the absolute value."
           agent-shell-anthropic-authentication
           (agent-shell-anthropic-make-authentication :login t)))
 
-  (define-key my-agent-map (kbd "a") #'agent-shell)
-  (define-key my-agent-map (kbd "x") #'agent-shell-openai-start-codex)
-  (define-key my-agent-map (kbd "c") #'agent-shell-anthropic-start-claude-code))
+  ;; (define-key my-agent-map (kbd "a") #'agent-shell)
+  ;; (define-key my-agent-map (kbd "x") #'agent-shell-openai-start-codex)
+  ;; (define-key my-agent-map (kbd "c") #'agent-shell-anthropic-start-claude-code)
+  )
 
 (defun init/modes ()
   (mouse-wheel-mode 1)
